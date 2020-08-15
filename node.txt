@@ -1,0 +1,58 @@
+Node.js是运行在服务器端的JavaScript
+Node.js是一个事件驱动I/O服务端JavaScript环境
+
+Node.js组成部分：
+    1.引入required模块：使用require指令来载入Node.js模块
+    2.创建服务器：服务器可以监听客户端请求，类似于Apache、Nginx等HTTP服务器
+    3.接受请求与响应请求：服务器很容易创建，客户端可以使用浏览器或终端发送HTTP请求，服务器接收请求后返回响应数据
+
+创建Node.js应用
+    一、引入required模块
+        var http = require("http");
+    二、创建服务器
+        使用http.createServer()方法创建服务器，并使用listen方法绑定8888端口。
+        函数通过request，response参数接收和响应数据
+        //1.引入required模块
+        var http = require("http");
+
+        http.createServer(function (request,response){
+            //2.发送HTTP头部
+                //HTTP状态值：200 ok
+                //内容类型：text/plain
+            response.writeHead(200, {'Content-Type': 'text/plain'});
+            //3.发送响应数据
+            response.end('Hello World\n');
+        }).listen(8888);
+
+        //4.终端打印
+        console.log('Server running at http://127.0.0.1:8888/');
+    
+NPM是随同Node.js一起安装的包管理工具，能解决nodejs代码部署上很多问题，
+    允许用户从NPM服务器下载别人编写的第三方包到本地使用
+    允许用户从NPM服务器下载并安装别人编写的命令行程序到本地使用
+    允许用户将自己编写的包或命令行程序上传到NPM服务器供别人使用
+
+    使用npm命令
+    安装模块    npm install <Module Name>
+            如安装express模块：npm install express
+            默认是本地安装，可在命令行后加入 -g 实现全局安装
+            每个模块包下都有一个Package.json文件
+            属性说明：
+                name - 包名
+                version - 包的版本号
+                description - 包的描述
+                homepage - 包的官方网站url
+                author - 包的作者
+                contributors - 包的贡献者姓名
+                dependencies - 依赖包列表
+                repository - 包代码存放的地方的类型，git/svn
+                main - main字段指定了程序的主入口文件，默认模块目录下的index.js
+                keywords - 关键字
+    卸载模块    npm uninstall express [-g]
+    更新模块    npm update <Module Name>
+    搜索模块    npm search <Module Name>
+    创建模块    npm init [-g]
+
+REPL（交互式解释器）
+    一个电脑环境，类似windows的终端，node自带交互式解释器，并可执行以下任务：
+        

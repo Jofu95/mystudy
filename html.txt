@@ -1,0 +1,238 @@
+超文本标记语言（HTML）
+一种使用结构化Web网页及其内容的标记语言
+
+<!DOCTYPE html>
+DOCTYPE	声明了文档的类型
+<html>	HTML标签的根元素
+<head>	包含文档的元数据（meta）如：<meta charset="utf-8">定义网页编码格式
+<title>	定义了文档标题
+<body>	定义文档的主体，即网页可见内容
+
+HTML标题
+	<h1> - <h6>标签来定义，字体大小一次递减
+	在每个页面中只使用一次<h1>，且其他标签使用不超过三个
+HTML段落
+	<p>标签定义
+HTML链接
+	<a>标签，链接外部地址实现页面跳转，href属性指定连接的地址
+	target属性设置为"_blank"新窗口打开
+	<a href="mailto:webmaster@example.com"></a>
+HTML图像
+	<img />标签，src属性指向图片的具体位置，alt属性为图像定义可替换文本
+HTML水平线
+	<hr>标签。创建水平线，分隔
+HTML注释
+	<!-- ... --> 提高可读性
+HTML拆行
+	<br/>标签，换行
+HTML文本格式化
+	<b>		定义粗体文本
+	<em>	定义着重文字
+	<i>		定义斜体字
+	<small>	定义小号字体
+	<strong>定义加重语气
+	<sub>	定义下标字
+	<sup>	定义上标字
+	<ins>	定义插入字
+	<del>	定义删除字
+HTML"计算机输出"标签
+	<code>	定义计算机代码
+	<kbd>	定义键盘码
+	<pre>	定义预览格式
+HTML引文、引用
+	<abbr>	定义缩写
+	<address>定义地址
+ 
+HTML元素：从开始标签到结束标签的所有代码
+	HTML文档由嵌套的HTML元素构成
+HTML属性
+	HTML元素可以设置属性
+	属性可以在元素中添加附加信息
+	总是以名称/值对出现。如：name="value"
+
+<head>元素
+	可添加到头部区域的元素标签为：<title>、<style>、<link>、<script>、<base>、<noscript>
+	<base />描述了基本的链接地址/连接目标
+	<link />定义文档与外部资源之间的关系，通常用与链接样式表
+	<link rel="icon" href="xxx.png/ico"> 添加地址栏图标
+	<style>
+	<meta />描述基本元数据，通常用于指定网页描述、关键词、作者、最后修改时间等
+		<meta name="keywords/author/description" content="">
+		<meta http-equiv="refresh" content="30">	每30s刷新网页
+
+HTML表格
+	<table>标签定义表格，<caption>定义表格标题，<th>定义表格表头,<tr>定义行，<td>定义列
+	<table>属性border默认不显示边框，border="1"带有边框
+		width定义表格宽，height定义表格高
+		表格空间，
+		cellspacing属性定义表格单元格之间空间，
+		cellpadding属性定义单元格边框与单元格内容之间的距离
+		colspan属性，将两个或多个列合并为一列
+		rowspan属性，将两行或多行合并为一行
+	表格头部、主体、页脚
+		<thead>		创建单独的表头
+		<tbody>		创建表格的主体
+		<tfoot>		创建单独的表页脚
+		主体应出现在头部、页脚之后
+
+HTML列表
+	有序列表 <ol>
+	无序列表 <ul>
+	<li> 定义列表
+	自定义列表 <dl>
+	<dt> <dd>
+
+HTML区块元素
+	块级元素：以新行来开始和结束。<div>,<ul>,<h1>,<p>
+	内联元素：不会以新行开始。<b>,<td>,<a>,<img>,<span>
+
+HTML表单
+	<from>表单标签
+	<input /> 输入标签，type属性定义不同输入类型
+		文本框<input type="text" /> 大多数浏览器最大20个字符
+		密码字段<input type="password" />不会明文显示
+		单选按钮<input type="radio" />
+		复选框<input type="checkbox" />
+		提交按钮<input type="submit" />
+		重置<input type="reset" />
+		隐藏<input type="hidden" />
+		文本域<textarea rows="" col=""></textarea>
+		下拉框<select><option></option></select>
+
+HTML框架
+	<iframe src=""></iframe> 可在同一窗口显示不同页面，可设置宽高
+		frameborder属性可选择是否显示边框
+	<frameset> HTML5不支持
+
+HTML实体字符
+	空格	&nbsp;
+	< 小于号	&lt;
+	> 大于号	&gt;
+	￥人民币	&yen;
+	? 版权		&copy;
+	? 注册商标	&reg;
+	? 商标		&trade;
+	x 乘号		&times;
+	? 除号		&divide;
+
+HTML多媒体（音效、音乐、视频、动画）
+	<object data=""></object>	data属性用于插入对象路径
+
+HTML5（下一代HTML标准）
+	目的为移动设备上支持多媒体
+	一些新特性：
+		用于绘画的canvas元素
+		用于媒体回放的video和audio元素
+		对本地离线存储的更好支持
+		新的特殊内容元素，如：article、footer、header、nav、section
+		新的表单控件，如：calender、date、time、email、url、search
+	HTML5<!DOCTYPE> 声明：<!DOCTYPE html>
+
+HTML5 canvas
+	canvas是用于图形的绘制，通过js完成，标签只是图形容器
+	创建一个画布
+	<canvas id="xxx"></canvas>
+	通过js绘制图像
+	获取画布对象，调用getContext("2d")
+	.fillStyle=""; 填充绘画颜色、渐变
+	.fillRect(x,y,width,height);定义举行填充方式
+	canvas路径
+		moveTo(x,y) 定义线条开始坐标
+		lineTo(x,y) 定义线条结束坐标
+		stroke() 绘制线条
+		fill()	绘制实心
+		beginPath();
+		arc(x,y,r,start,stop) 绘制圆形
+	canvas文本
+		font  定义大小 字体
+		fillText(text,x,y);  绘制实心文本
+		strokeText(text,x,y);绘制空心文本
+	canvas渐变
+	canvas图像
+
+HTML5 内联SVG
+	SVG指可伸缩矢量图形，用于定义网络的基于矢量的图形
+	SVG使用XML格式定义图形
+	SVG图像在放大或改变尺寸下图形质量不会损失
+	优势：
+		可通过文本编辑器来创建和修改
+		可被搜索、索引、脚本化或压缩
+		可伸缩的
+		图像可在任何的分辨率下被高质量的打印
+		可在图像质量不下降的情况下被放大
+
+HTML5 拖放
+	设置元素为可拖放 将属性draggable设置为true
+
+HTML5 新的语义元素
+	<header>,<nav>,<section>,<article>,<aside>,<figcaption>,<figure>,<footer>
+			 <header>
+			  <nav>
+	<section>		<aside>
+	<article>
+	        <footer>
+	<header>描述文档头部区域
+	<nav>定义导航链接部分
+	<section>对网站或应用程序中页面的内容进行分块或文章进行分段
+	<article>文档、网页或应用程序中独立、完整、可独自被外部应用的内容
+	<aside>定义页面主区域内容之外的内容（比如侧边栏）
+	<footer>描述文档底部区域，通常包含文档作者、著作权信息、链接的使用条款，联系信息
+	<figure>规定独立的流内容（图片、图表、照片等）
+	<figcaption>定义<figure>元素的标题
+	IE8及早版本无法在这些元素中渲染css效果，解决兼容问题，下载html5shiv.js，并导入
+
+HTML5 Web存储（ie7及以前不支持）
+	html5之前使用cookie存储。缺点存数量小，需要请求头上带着数据
+	本地存储用户浏览数据，安全快速，存储量大，不影响网站性能
+	数据以 键/值对存在，web网页数据只允许该网页访问使用
+	客户端存储数据的两个对象：
+		localStorage	没有时间限制的数据存储
+		sessionStorage	针对一个session的数据存储
+	使用之前检查浏览器是否支持web存储(js代码)：
+	if(typeof(Storage)!=="undefined"){//支持}else{//不支持}
+	localStorage与sessionStorage使用的api相同
+	存储数据 setItem(key,valye);
+	读取数据 getItem(key);
+	删除单个数据 removeItem(key);
+	删除所有数据 clear();
+	得到某个索引的key key(index);
+
+HTML5 Web Sql
+	浏览器上模拟数据库，可使用js操作sql完成数据读写
+	核心方法：
+		openDatabase	使用现有或新建数据库创建一个数据库对象
+		transaction		控制事务，执行提交或回滚
+		executeSql		执行sql查询
+	openDatabase(数据库名,版本号,描述文本,数据库大小,创建回调);
+	var db = openDatabase('mydb','1.0','Test db',2*1024*1024);
+
+HTML5 应用程序缓存
+	web应用可进行缓存，没有网络也能进行访问
+	三个优势：
+		离线浏览			用户可在应用离线时使用
+		速度				已经缓存资源加载更快
+		减少服务器负载		浏览器将只从服务器下载更新过或更改过的资源
+	启用应用程序缓存，在文档的<html>标签设置属性manifest="xxx.appcache"
+	manifest文件(需正确配置MIME-type,即:"text/cache-manifest",必须在web服务器上配置)为三部分
+		cache manifest	首次下载进行缓存
+		network 		需与服务器连接，不会被缓存
+		fallback		当页面无法访问，退回页面
+	用户清除浏览器缓存，manifest文件被修改，程序更新应用缓存等 会将缓存更新
+
+HTML5 WebSocket
+	是一种在单个TCP连接上进行全双工通讯的协议
+	WebSocket API中，浏览器和服务器只需要一个握手动做，就形成了数据通道，可相互传输数据
+	通过js向服务器端发出建立WebSocket连接请求，连接建立后，通过TCP连接直接交换数据
+	创建WebSocket对象：new WebSocket(url,[protocal]);
+	WebSocket属性:
+		readyState表示连接状态
+		bufferedAmount
+	WebSocket事件
+		onopen		连接建立时触发
+		onmessage	客户端接受服务端数据时触发
+		onerror		通信发生错误是触发
+		onclose		连接关闭时触发
+	WebSocket方法
+		send(message);	发送数据
+		close();		关闭连接
+	

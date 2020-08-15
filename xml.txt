@@ -1,0 +1,166 @@
+XML指可扩展标记语言，宗旨是传输数据
+XML标签没有被预定义。需要自行定义
+用来结构化、存储以及传输信息
+
+XML声明
+<?xml version="1.0" encoding="utf-8"?>
+
+XML语法规则：
+	所有元素都必须有关闭标签
+	XML标签对大小写敏感
+	XML文档必须有根元素
+	XML属性值必须加引号
+	XML文档必须有一个根元素
+	实体引用替换 >、<、&、'、"分别对应&gt;、&lt;、&amp;、&apos;、&quot;
+	注释	<!--  -->
+	XML以LF存储换行
+	XML命名规则：
+		名称可以包含字母、数字以及其他字符
+		名称不能以数字开头或者标点符号开始
+		名称不能以xml(或者XML、Xml等等)开始
+		名称不能包含空格
+
+XML可以在不中断应用程序的情况下进行扩展
+
+属性:
+	属性值必须使用引号
+	避免使用属性：属性不能包含多个值、属性不能包含树结构、属性不容易扩展
+	元数据应当存储为属性，数据本身应当存储为元素
+	
+XML验证：
+	通过DTD验证XML是合法的XML
+	DTD的目的是定义XML文档的结构，它使用一系列合法的元素来定义文档结构
+	
+XML JavaScript:
+	XMLHttpRequest对象用于在后台与服务器交换数据
+	xmlhttp = new XMLHttpRequest();
+	
+	XML解析器(DOMParser)把XML文档转换为XML DOM对象-可通过JavaScript操作的对象
+	
+XML命名空间：
+	xmlns属性：xmlns:前缀="URI"
+	
+XML CDATA:
+	XML文档中所有的文本都会被解析器解析，只有CDATA区段中的文本会被解析器忽略
+	格式：<![CDATA[ ... ]]>
+	
+XML DOM：
+	DOM是W3C的一种标准
+	W3C文档对象模型是一种使程序和脚本有能力动态的访问和更新文档的内容、结构以及样式的平台和语言中立的接口
+	DOM分为三个不同级别/部分：
+		核心DOM		用于任何结构化文档的标准模型
+		XML DOM		用于XML文档的标准模型
+		HTML DOM	用于HTML文档的标准模型
+	DMO定义了所有文档元素的对象和属性，以及访问他们的方法(接口)
+	
+	XML DOM节点：
+		DOM规定：
+			整个DOM文档是一个文档节点
+			每个XML元素是一个元素节点
+			XML元素中的文本是文本节点
+			每个XML属性是一个属性节点
+			注释是注释节点
+	
+	XML DOM节点树：
+		XML DOM 把 XML 文档视为一种树结构。这种树结构被称为节点树。
+		可通过这棵树访问所有节点。可以修改或删除它们的内容，也可以创建新的元素。
+
+	XML DOM解析器：
+		解析器把XML转换成js可存储的对象(XML DOM对象)
+		在访问和操作XML文档前，必须加载到XML DOM对象
+		
+		加载XML文档：
+			if(window.XMLHttpRequest){//创建一个·XMLHTTP对象
+				xmlhttp = new XMLHttpRequest();
+			}else{
+				xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			xmlhttp.open("GET","xxx.xml",false);//打开XMLHTTP对象
+			xmlhttp.send();//发送一个XML HTTP请求
+			xmlDoc = xmlhttp.responseXML;
+		加载XML字符串：
+			if(window.DOMParser){
+				parser = new DOMParser();
+				xmlDoc = parser.parseFromString(text,"text/xml");
+			}else{
+				xmlDoc = new ActiveXObject("Microsoft.XMLHTTP");
+				xmlDoc.async = false;
+				xmlDoc.loadXML(text);
+			}
+	
+	XML DOM属性：
+		x.nodeName			x的名称
+		x.nodeValue			x的值
+		x.parentNode		x的父节点
+		x.childNodes		x的子节点
+		x.attributes		x的属性节点
+		x指某个节点对象
+	XML DOM方法：
+		x.getElementsByTagName(name)	获取带有指定标签名称的所有元素
+		x.appendChild(node)				向x插入子节点
+		x.removeChild(node)				从x删除子节点
+		
+	XML DOM获取节点的值：
+		getAttribute()		返回属性值
+		setAttribute()		设置属性
+		removeAttribute()	删除属性
+		
+
+
+SVG：
+	SVG是使用XML来描述二维图形和绘图程序的语言
+	SVG指可伸缩矢量图形，定义用于网络的基于矢量的图形
+	XML格式定义图形，SVG图像在放大或改变尺寸的情况下图形质量不会有所损失
+	<svg>标签开始，</svg>标签结束，xmlns属性可定义SVG命名空间
+	
+	SVG文件可通过<embed>、<object>、<iframe>嵌入HTML文档中
+		<embed>标签,所有浏览器都支持，并允许使用脚本，HTML5允许
+		<embed type="image/svg+xml" src="xxx.svg" />
+		<object>标签,所有主要浏览器都支持，不允许使用脚本
+		<object type="image/svg+xml" data="xxx.svg"></object>
+		<iframe>标签,所有浏览器都支持，并允许使用脚本，HTML5允许
+		<iframe src="xxx.svg"></iframe>
+		
+	SVG预定义形状元素：
+		矩形	<rect>			
+		圆形	<circle>
+		椭圆	<ellipse>
+		线		<line>
+		折线	<polyline>
+		多边形	<polygon>
+		路径	<path>
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

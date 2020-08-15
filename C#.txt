@@ -1,0 +1,258 @@
+Window窗体设计器
+	新建窗体应用程序
+	
+	控件：
+		.net中大多数控件都是派生于System.Windows.Forms.Control类，该类定义了控件的基本功能
+		定制或用户控件，派生于System.Windows.Forms.UserControl
+	
+	属性：
+		Anchor			指定控件的容器大小发生变化时，该控件如何响应
+		Dock			使控件靠在窗口的边界
+	
+	事件：
+		Click			单击控件触发。某些情况下，回车键也会触发
+		DoubleClick		双击控件触发
+		DragDrop		完成拖放时触发
+		...
+	
+	Button控件：
+		按钮控件主要执行三类任务：
+			1.某种状态关闭对话框; 2.给对话框上输入的数据执行操作; 3.打开另一个对话框或应用程序
+		属性：
+			FlatStyle			改变按钮样式。PopUp显示为平面
+			Enabled				设置为false，按钮灰显，单击不起作用
+			Image				指定按钮上显示的图像
+			ImageAlign			可设置按钮上图像在什么地方显示
+	
+	Label和LinkLabel控件
+		Label控件显示标题或简短提示，给用户解释窗体某些内容。标准的Windows标签
+		LinkLabel派生于标准标签，但以Internet链接方式显示(超链接)
+		属性：
+			BorderStyle			标签边框样式，默认无边框
+			DisabledLinkColor	用户单击LinkLabel后控件颜色
+			FlatStyle			控制显示控件的方式
+			Image				标签上显示图像
+			ImageAlign			图像显示在标签的位置
+			LinkArea			文本中显示为链接的部分
+			LinkColor			链接的颜色
+			Links				查找需要的链接，控件会跟踪显示在文本中的链接
+			LinkVisited			返回链接是否可访问
+			Text				显示在Label上的文本
+			TextAlign			文本显示在空间的什么位置
+	
+	TextBox控件：输入文本框
+		属性：
+			CausesValidation		属性为true，控件获得焦点时，触发两个事件Validating和Validated
+			MaxLength				指定输入到TextBox中的文本最大长度
+			Multiline				表示控件是否是一个多行控件(显示多行文本)
+			PasswordChar			指定是否用密码字符替换单行文本框输入的字符，Multiline为true不起作用
+			ReadOnly				文本是否为只读
+			WordWrap				多行文本框中，一行宽度超过控件宽度，文本是否自动换行
+		事件：
+			Enter、GotFocus、Leave、Validating、Validated、LostFocus
+			这6个事件按先后顺序触发，统称焦点事件，
+			当控件的焦点发生改变时，Validating、Validated仅在控件接受焦点，且CausesValidation为true时触发
+			
+			KeyDown、KeyPress、KeyUp
+			统称键事件，可以监视和改变输入到控件中的内容。KeyDown和KeyUp接受按下键对应的键码，KeyPress接受键对应字符
+			
+			Change		只要文本框中文本内容发生改变，会触发
+			
+	RadioButton和CheckBox控件：
+		RadioButton控件属性：
+			Appearance			显示为按钮时，控件选中·显示为按下状态，否则为3D外观
+			AutoCheck			为true用户单击，会显示一个选中标记，默认false
+			CheckAlign			改变单选按钮对齐形式
+			Checked				控件状态，选中为true
+		事件：	
+			CheckChanged		当控件选中改变时，触发该事件
+			Click				每次单击控件都会触发该事件，连续单击多次只改变Checked属性一次
+		CheckBox控件的属性：
+			CheckState			三种状态Checked、Indeterminate、Unchecked，复选框状态为Indeterminate，其他复选框灰显
+			ThreeState			为false用户不可把状态改为Indeterminate
+		事件：
+			CheckedChanged
+			CheckedStateChanged
+		GroupBox控件：
+			
+	RichTextBox控件：
+		用于显示和输入格式化的文本
+		属性：
+			CanRedo				某个任务未完成，该属性为true
+			CanUndo				如果可以在RichTextBox上执行撤销操作，该属性为true
+			RedoActionName		操作名称，用于重做已经在RichTextBox中撤销的动作
+			DeleteUrls			为true，可检测URL，并格式化
+			Rtf					
+		事件：
+			LinkedClick			用户单击文本中的链接时，触发该事件
+			Protected			用户尝试修改已经标记为受保护的文本时，触发该事件
+			SelectionChanged	选中文本发生变化时触发该事件
+	
+	ListBox和CheckedListBox控件：
+		控件的属性：
+			SelectedIndex		表示列表框选中选项的基于0的索引
+			ColumnWidth			包含多列的列表框，指定列宽
+			Items				包含列表框中的所有选项，可使用集合属性增删选项
+			MultiCloumn			列表框可以有多个列，可获取或设置列表框中列的个数
+			SelectedItem		只能选一个选项列表框中，代表选中的选项，多列中，代表选中的第一个
+			SelectedItems		当前选中的所有选项
+			SelectedMode		None不能选择任何选项One只能选一个MultiSimple多个MultiExtended多个还可使用辅助键
+			Sorted				为true选项字目顺序排序
+			Text				搜索匹配该文本的选项
+			
+		方法：
+			ClearSelected		清除列表框中所有选项
+			FindString			查找列表框中第一个指定字符串开头的字符串
+			FindStringExact		与FindString类似但是匹配整个字符串
+			GetSelected			
+			SetSelected			设置或清除选项
+			ToString			返回当前选中的选项
+		事件：
+			ItemCheck			（只适用于CheckedListBox）在列表框中一个选项的选中状态改变时触发
+			SelectedIndexChanged再选中选项的索引改变时触发
+		
+	ComboBox控件：
+		属性：
+			DropDownStyle
+			三种样式显示：DropDown可编辑控件文本框，查看可见，Simple与前者相同但列表部分可见，DropDownList不可编辑文本框
+			DroppedDown			控件列表部分是否可下拉，为true列表打开
+			MaxLength			可控制输入到文本矿部份的最大字符数
+			SelectedIndex		列表中当前选中选项索引
+			SelectedItem		列表中当前选中选项
+			SelectedText		文本框部分中被选中的文本
+		事件：
+			DropDown			下拉控件的列表部分触发
+			SelectedIndexChanged改变控件列表部分中的选项触发
+			KeyDown|KeyPress|KeyUp文本框获取焦点时，按下一个键触发
+			TextChanged			在Texr属性改变时触发
+			
+	ListView控件：
+		属性：
+		方法：
+			BeginUpdate			将告诉列表视图停止更新
+			Clear				彻底清除列表视图
+			EndUpdate			调用BeginUpdate后调用，列表视图会显示所有选项
+			EnsureVisible		视图列表会滚动，以显式指定索引选项
+			GetItemAt			返回列表视图中位于下x，y的选项
+		事件：
+			AfterLabelEdit		编辑标签后触发
+			BeforeLabelEdit		编辑标签前触发
+			ColumnClick			单击一个列触发
+			ItemActivate		激活选项触发
+			
+	StatusBar控件：
+		属性：
+			BackgroundImage		给状态栏赋予一个图像，显示在背景上
+			Panels				面板集合，可添加和删除面板
+			ShowPanels			显示面板，为true
+			Text				不使用面板，属性存储显示在状态栏中的文本
+		事件：
+			DrawItem			自己绘制面板，需订阅该事件
+			PanelClick			单击面板触发
+			
+	TabControl控件：
+		属性：
+			Alignment		控制标签在控件的位置
+			Appearance		控制标签的显示方式
+			HotTrack		为true，则当鼠标指针划过控件，外观改变
+			Multiline		为true，有多行标签
+			RowCount		当前显示的标签行数
+			SelectedIndex	返回或设置选中表亲啊的索引
+			TabCount		返回标签总数
+			TabPages		集合，可添加和删除TabPages
+	总结：Windows应用程序常用控件，
+		Label、Button、RadioButton、CheckBox、ComboBox、ListBox、ListBox
+		GroupBox、RichTextBox、StatusBar、ImageList、TabControl
+		
+	MenuItem控件
+		属性：	
+			BarBreak		创建多行菜单
+			Checked			菜单是否可被选中
+			DefaultItem		默认菜单项
+			Enabled			为false，菜单项灰显，不被选中
+			MdiList			菜单是否用一系列子窗口来填充
+		事件：
+			Click			单击菜单项触发
+			DrawItem		需要绘制菜单项时触发
+			MeaureItem		绘制菜单项之前触发
+			Popup			显示子菜单项触发
+			Select			鼠标指针放在菜单项或键盘移动焦点触发
+			
+	ToolBar：
+		属性：
+			Appearance		控件外观
+			AutoSize		false可改变控件大小
+			Buttons			控件中包含的按钮集合
+			ButtonSize		按钮大小
+			Divider			true时ToolBar顶部绘制边框
+			DropDownArrows	按钮提供了下拉列表，按钮右边会有箭头
+			ImageList		图像列表
+			ShowToolTips	true时，按钮提示
+			Wrappable		true时,工具栏不够长换行
+		事件：
+			ButtonClick		单击工具栏按钮触发
+			ButtonDropDown
+		ToolBarButton控件属性：
+			DropDownMenu	
+		
+	SDI和MDI应用程序：
+		
+	创建控件：
+		自定义控件：用户控件和定制控件	
+		用户控件继承了类UserControl，定制控件继承于类Control
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		

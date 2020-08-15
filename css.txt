@@ -1,0 +1,265 @@
+层叠样式表（CSS）
+	定义如何显示HTML元素
+	通常存储在样式表
+
+样式使用方式
+	外部样式表
+		在<head>标签中使用<link>标签导入样式表
+		<link rel="stylesheet" type="text/css" href="xxx.css">
+	内部样式表
+		在<head>标签中使用<style>标签，在<style>标签内中设计样式
+	内联样式
+		直接在HTML元素中使用属性style添加样式（拥有最高优先级）
+
+CSS语法
+	两个主要部分构成：选择器、一条或多条声明
+	selector {property1:value1;property2:value2;...}
+	注释：/* ... */
+
+CSS选择器
+	Id选择器
+		HTML元素以id属性设置id选择器，css中id选择器以 #+id选择器名 开头
+		id属性不能以数字开头，id属性只能在每个HTML文档出现一次
+	class选择器
+		描述一组元素的样式
+		class可以在多个元素中使用，在HTML中以class属性表示，在css中以 .+class选择器名
+	属性选择器
+		[属性]{...}、[属性=值]{...}、[属性~=值]{...}包含指定值、[属性|=值]{...}包含指定值
+	权重计算样式优先级：内联样式权重值最高1000，id选择器权重为100，类选择器权重为10，标签选择器权重为1
+
+CSS背景
+	background-color		定义元素的背景颜色
+	background-image		定义元素的背景图片
+		默认情况下背景图片进行水平或垂直平铺重复显示
+	background-repeat		背景图像进行平铺
+		background-repeat:repeat-x; 图像水平平铺
+		background-repeat:repeat-y; 图像垂直平铺
+		background-repeat:no-repeat;图像不平铺重复显示
+	background-attachment	背景图像是否固定或随页面滚动
+		background-attachment:scroll; 默认随页面其余部分滚动
+		background-attachment:fixed; 背景图像固定不动
+	background-position		设置定位
+		background-position:关键字1 关键字2;(关键字有 top、center、left、right、bottom)
+		关键字可换为百分数值或长度值
+	背景简写：
+		background:color image repeat attachment position
+
+CSS文本
+	改变也米娜文本颜色、字符间距、对齐文本、装饰文本、对文本进行缩进等
+	文本颜色	color:black/#000/rgb(0,0,0);
+	文本对齐	text-align:centet/right/left/justify
+	文本修饰	text-decoration
+		text-decoration:none;	删除文本修饰
+		text-decoration:underline;	下划线
+		text-decoration:line-throungh;	贯穿线
+		text-decoration:overline;	上划线
+	文本转换	text-transform:uppercase/lowercase/capitalize 文本转换为大写/小写/首字母大写
+	文本缩进	text-indent:50px;
+	文本间隔	word-spacing:30px;/letter-spacing:30px;字间隔/字符间隔
+	文本行高	line-height:20px;
+	文本阴影	text-shadow:水平 垂直 模糊距离 颜色;
+	元素空白处理	white-space:nowrap; 文本不换行
+
+CSS字体
+	定义字体、加粗、大小、文字样式
+	字体：五种通用字体
+		Serif字体、Scans-serif字体、Monospace字体、Cursive字体、Fantasy字体
+		font-family属性设置字体
+	字体样式：
+		font-style:normal;	正常
+		font-style:italic;	斜体
+		font-style:oblique;	斜体
+	字体大小:
+		font-size:40px;默认字体大小16px=1em
+		font-weight:bold/bolder;字体加粗
+CSS链接
+	四个链接状态：
+		a:link		正常，未访问过
+		a:visited	用户已访问过链接
+		a:hover		鼠标放在链接上
+		a:active	链接被点击时
+
+CSS列表
+	list-style:none;去除列表项前的标记
+
+CSS盒子模型（包括边距、边框、填充、实际内容）
+	margin（外边距）、border（边框）、padding（内边距）、content（内容）
+
+CSS边框
+	边框样式
+		border-style:none; 无边框
+		border-style:dotted; 点线框
+		border-style:solid; 实线框
+		border-style:dashed; 虚线框
+		border-style:double; 双边线框
+	边框宽度
+		border-width:5px;
+	边框颜色
+		border-color:red;
+		border-color:transparent; 不可见边框
+	单独设置各边框
+		border[-top/left/right/bottom[-style/color/width]]:
+		border-style/color/width:
+		一个值四边框、两个值上下-左右、三个值上-左右-下、四个值上-右-下-左
+	简写：border:width style color;
+
+CSS轮廓
+	outline:none;
+
+CSS外边距
+	margin:auto;	依赖浏览器边距
+	margin:50px;
+CSS内边距
+	padding:
+	内外边距属性值设置各边规则同边框
+
+display和visibility
+display:none;和visibility：hidden;都表示隐藏元素，前者不会占据空间，后者会保留原有空间
+
+将块元素转换为内联元素
+display:inline;
+将内联元素转换为块元素
+display:block;
+
+CSS定位
+	属性position将元素定位
+	position:fixed; 元素的位置相对于浏览器窗口固定不动,与文档流无关不占空间
+	position:relative; 相对定位
+	position:absolute; 绝对定位
+	z-index:数值; 数值越小堆叠在越下面
+	top、right、left、bottom
+	overflow:hidden; 内容溢出被裁剪
+
+CSS浮动
+	元素向左或向右移动
+	float:none/left/right;
+	clear:left/right/both/none; 清除浮动
+
+CSS组合选择器
+	后代选择器(以空格分隔)：匹配所指定元素的后代元素
+	子元素选择器(以 > 分隔)：选择作为某元素的所有直接子元素
+	相邻兄弟选择器(以 + 分隔)：选择相邻其后的元素
+	普通兄弟选择器(以 ~ 分隔)：选取所有相邻元素
+
+CSS伪类
+	用来添加一些选择器的效果
+	:first-child 选择元素的第一个子元素
+	:focus 元素输入后具有焦点
+
+CSS图像透明
+	属性 opacity，值为0.0-1.0,值越小，越透明
+	IE8和早期版本使用滤镜：filter:alpha(opacity=40);值为0-100
+
+CSS3
+	圆角  border-radius该属性可给任何元素制作圆角
+	背景
+		background-image：url() 添加背景图片
+		background-size:width height; 指定宽高
+		background-origin  指定背景图像的位置区域
+			background-origin:border-box/padding-box/content-box;
+		background-clip
+	渐变
+		线性渐变 - 向下/向上/向左/向右/对角方向
+		background:linear-gradient(方向,颜色1，颜色2,...);对角方向
+		background:repeating-linear-gradient(方向,颜色1，颜色2,...);重复线性渐变
+		径向渐变 - 由中心定义
+		background:radial-gradient(center,shape size,start-color,...stop-color)
+	文本效果
+		text-shadow:水平(px) 垂直(px) 模糊距离(px) 阴影颜色; 文本阴影
+		box-shadow:水平(px) 垂直(px) 模糊距离(px) 阴影颜色; 盒子阴影
+		text-overflow:ellipsis;
+		word-wrap:break-word;	换行
+		word-break:break-all;	拆分换行
+	2D转换
+		transform 变形
+		transform:translate()|rotate()|scale()|skew()|matrix();
+			translate(xpx,ypx) 根据x、y轴位置参数，从当前位置移动
+			rotate(xdeg);  x为正顺时针旋转，负数逆时针旋转
+			scale(x,y);	   x,y数值缩放元素的宽高倍数
+			skew(xdeg,ydeg);     x,y轴上倾斜度数
+			matrix(n,n,n,n,n,n) 参数包含：旋转、缩放、移动、倾斜
+		transform-origin 变形原点,更换转换元素的位置
+		transform-origin:x y z;
+	3D转换
+		transform
+			tranfrom:translate3d(x,y,z)|rotate3d(x,y,z,angle)|scale3d(x,y,z)
+		transform-style
+			transform-style:preserve-3d; 3d空间
+		perspective:number;  3d元素距离视图距离,只影响3d转换元素
+	过渡
+		元素从一种样式逐渐改变为另一种样式，指定css属性，指定持续时间
+		transition
+			transition-property:all|property;指定所有/部分属性拥有过渡效果
+			transition-duration:time; 指定过渡所需花费时间
+			transition-timing-function:
+			transition-delay:time;效果开始时间
+	动画
+		@keyframes规则 是创建动画，指定一个css样式和动画将逐步从目前样式改为新样式
+		@keyframes 动画名称
+		{
+			from{css样式}
+			to{css样式}
+		}
+		也可使用百分比替代from，to（0%，100%）
+		animation
+			animation-name:name; 动画名称
+			animation-duration:time; 动画完成周期所花费时间
+			animation-timing-function:linear/ease...;规定动画速度曲线
+			animation-iteration-count:n; 规定动画播放次数
+			animation-direction:   ;规定动画下一周期是否逆向播放
+			animation-play-state:running/paused;规定动画是否正常运行
+	多列
+		column-count:n; 指定元素分为的列数
+		column-gap:200px; 列之间间距
+		column-width:100px; 指定列宽
+		columns:200px 3;列宽200px，3列
+		column-rule-sytle|color|width:
+	框大小
+		默认情况下，元素宽高都要加上内边距和边框，为使实际宽高一致，使用
+		box-sizing:border-box;
+	弹性盒子
+		弹性盒子是css3的一种新的布局模式
+		弹性盒子由弹性容器(container)和弹性元素(item)组成
+		弹性容器通过设置display属性值flex或inline-flex将其设定为弹性容器
+		弹性容器包含一个或多个弹性子元素，弹性子元素通常在弹性盒子内一行显示
+		display:flex|inline-flex;将元素设置为弹性容器
+		flex-direction:row|row-reverse|column|column-reverse;指定弹性子元素在父容器中的顺序
+		justify-content:flex-start|flex-end|center|space-betwen|space-around;行左右排列
+			justify-content:flex-start; 弹性子元素紧挨左到右排列位于弹性容器左侧
+			justify-content:flex-end; 弹性子元素紧挨左到右排列位于弹性容器右侧
+			justify-content:center; 弹性子元素紧挨左到右排列位于弹性容器中间
+			justify-content:space-around; 弹性子元素平均分配，两边间隔为弹性元素间隔一半
+			justify-content:space-between; 弹性子元素与弹性容器两侧紧挨，中间均匀分配
+		align-items:flex-start|flex-end|center|baseline|stretch;行的上下排列
+			align-items:flext-start; 该行侧轴起始边界
+			align-items:flext-end; 该行侧轴结束边界
+			align-items:center; 
+			align-items:baseline;
+			align-items:stretch;
+		flex-wrap:nowrap|wrap|wrap-reverse|initial|inherit; 指定弹性盒子的子元素换行方式
+			flex-wrap:nowrap; 默认值，单行，该情况下弹性子元素会溢出
+			flex-wrap:wrap; 弹性子元素溢出会折行
+			flex-wrap:wrap-reverse; 反转wrap排列
+		align-content:flex-start|flex-end|center|space-betwen|space-around|stretch;多行上下
+		弹性子元素属性
+			排序: order:num; 数值越小排在前面，可以为负数
+			对齐：margin:auto;居中
+			align-self:auto|flex-start|flext-end|center|baseline|stretch; 列的上下排列
+			flex:1;弹性盒子元素占一行的比例
+	多媒体查询
+		@media 规则
+		语法：
+		@media not|only 媒体类型 and (表达式){css代码}
+		媒体类型：all(所有设备)、print(打印机)、screen(电脑、手机、平板)、speech（阅读器）
+		
+响应式Web设计
+	让网页能够在所有设备上有好的显示
+	响应式Web设计只使用HTML和CSS
+	viewport用户网页的可视区域
+		width:控制viewport的大小，如device-width设备宽度
+		height:和width相对应
+		initial-scale：初始缩放比例
+		maximum-scale：允许用户缩放的最大比例
+		minimum-scale：允许用户缩放的最小比例
+		user-scaleble：用户是否可以缩放
+

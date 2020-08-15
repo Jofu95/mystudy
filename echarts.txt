@@ -1,0 +1,40 @@
+ECharts是使用js实现的开源可视化库，涵盖各行业图标
+配置语法：
+	1.引入echarts.mim.js文件
+	2.为ECharts准备一个具备宽高的DOM容器
+	3.设置配置信息
+		echarts.init(document.getElementById('main')).setOption(option);
+		option表示的是使用json数据格式的配置来绘制图表：
+			1）标题：
+				title: {
+					text: '第一个ECharts实例'
+				},
+			2）提示信息：
+				tooltip: {},
+			3）图例组件：
+				legend: {
+					data: [{
+						name: '系列1', 
+						icon: 'circle', 
+						textStyle: {color: red}
+					}]
+				},
+			4）X轴：
+				xAxis: {
+					data:['xxx', 'yyy', 'zzz',...]
+				},
+			5）Y轴：
+				yAxis: {},
+			6）系列列表：	
+				series: [{
+					name: 'xxx', //系列名称
+					type: 'bar', //系列图标类型
+					data: []， //系列中数据内容
+				}]
+				'bar'柱状/条形图，'line'折线/面积图，'pie'饼图，'scatter'散点图，'radar'雷达图，'tree'树形图，
+				'parallel'平行坐标系，'gauge'仪表盘，'funnel'漏斗图，'map'地图，'heatmap'热力图，'graph'关系图
+
+异步加载数据：
+	通过jQuery异步获取数据后，通过setOption填入数据和配置项
+	数据动态更新
+

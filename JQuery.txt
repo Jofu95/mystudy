@@ -1,0 +1,175 @@
+JQuery
+	是一个js的函数库
+	基于DOM操作工具，可是操作DOM对象变得异常容易
+	统一了不同浏览器的API接口，使代码在所有浏览器上都能运行
+	
+	JQuery的加载：
+		<script type='text/javascript' scr='xxx.js'></script>
+		加载方式：
+			一、采用CDN加载，如果加载失败，退回到本地加载
+			二、采用协议无关的加载网址
+		
+	JQuery基础：
+		jquery对象：
+			全局对象可用$符简写，jquery和$等价,jquery的全部方法都定义在该对象上
+			var listItem = jQuery('li')与var listItem = $('li')等价
+		jquery构造函数：
+			$('')返回的是jquery对象的实例不是DOM对象
+			1.CSS选择器作为参数
+				$('*'),$('#lastname'),$('h1,div,p'),$('p:last')，，，
+			2.DOM作对象作为参数
+				$(document.body)
+			3.HTML代码作为参数
+			4.第二参数
+			
+		jquery核心思想是"先选中某些网页元素，然后对其进行某种处理"
+			1.length属性	jquery对象返回的结果集是类似数组的对象，该属性可判断选中的网页元素个数
+			2.下标运算符	jquery对象元素是DOM对象，通过下标可取出Element节点实例
+			3.is方法		返回布尔值判断选中结果是否符合某个条件，条件可以是css选择器|函数|DOM元素|jQuery实例
+			4.get方法		get(0)是下标运算符的另一种方法
+			5.eq方法		返回一个jQuery实例对象，取出对应DOM对象的jQuery对象，eq(0)从0开始
+			6.each|map方法	遍历结果集
+				each方法接受一个函数作为参数，依次处理集合中的每一个元素
+				each(function(){index, element})	index索引，element对应DOM对象
+				map方法与each方法完全一样，区别在于map有一个返回值，返回新的jQuery对象
+			7.内置循环
+		
+		$(document).ready()
+			接受一个函数作为参数，该参数作为document对象的DOMContentLoaded事件的回调函数，即
+			当页面解析完以后，在所有外部资源完成加载之前，该函数立刻执行
+			初始化页面：
+				$(document).ready(function(){});等价于$(function(){});
+		
+		$.noConflict方法
+			<script>$.noConflict()</script>避免某些情况其他函数库会用到$，而引起冲突，允许$与jQuery脱钩
+		
+		jQuery实例对象的方法
+			过滤结果集：
+				first()			返回结果集的第一个成员
+				last()			返回结果集的最后一个成员
+				next()			返回紧邻的下一个同级元素
+				prev()			返回紧邻的上一个同级元素
+				parent()		返回当前元素的父元素
+				parents()		返回当前元素的所有上级元素
+				children()		返回当前元素的所有子元素
+				siblings()		返回当前元素的所有同级元素
+				nextAll()		返回当前元素其后的所有同级元素
+				prveAll()		返回当前元素前面的所有同级元素
+				closest()		返回当前元素以及所有上级元素中第一个符合条件的元素
+				find()			返回当前所有符合条件的下级元素
+				add()			给结果集添加元素
+				filter()		用于过滤结果集，可接受多种类型参数，只返回与参数类型一致的结果
+				not()			与filter方法完全一致，但返回相反结果
+				has()			与filter方法作用相同，但只过滤出子元素符合条件的元素
+				
+			DOM相关方法：
+				html()			返回该元素包含的html代码
+				text()			返回该元素包含的文本
+				addClass()		用于添加一个类
+				removeClass()	用于移除一个类
+				toggleClass()	用于折叠一个类(没有就移除)
+				css()			用于改变css设置(参数是css属性名)
+				val()			返回结果集第一个元素的值
+				prop()			DOM元素的属性要用prop读写
+				attr()			网页元素的属性要用attr读写
+				removeProp()	
+				removeAttr()
+				data()			在DOM对象上存储数据
+				
+			添加、复制、移动网页元素的方法：
+				append()		将参数中的元素插入到当前元素末尾
+				appendTo()		将当前元素插入到参数中的元素末尾
+				prepend()		将参数中的元素，变为当前元素的第一个子元素
+				prependTo()		将当前元素变为参数中元素的第一个子元素
+				after()			将参数中的元素插入到当前元素后面
+				isertAfter()	将当前元素插入到参数中元素的后面
+				before()		将参数中的元素插入到当前元素的前面
+				insertBefore()	将当前元素插入到参数中元素的前面
+				wrap()			将参数中的元素变成当前元素的父元素
+				
+		事件处理：
+			click,keyup,keydown.keypress,mouseover,blur,focus,hover
+			
+	JQuery工具方法
+		常用工具方法：
+			$.trim()			用来移除字符串两端空白
+			$.contains()		返回一个布尔值，第二个参数是否为第一个参数的下级
+			$.each()			用于遍历数组和对象，返回原始对象,接受两个参数，数据集合和回调函数
+			$.map()				用于遍历数组和对象，返回新的对象,接受两个参数，数据集合和回调函数
+			$.inArray()			返回一个值在数组中的位置，从0开始，不存在返回-1
+			$.extend()			用于将多个对象合并进第一个对象
+			$.proxy()			返回新函数，为回调函数绑定上下文对象
+				$.proxy(function, context)|$.proxy(context, name)
+			$.data()			在DOM对象上存储数据
+			$.removeData()		移除$.data()存储的数据
+			$.parseHTML()		用于将字符串解析为DOM对象
+			$.parseJSON()		用于将JSON字符串解析为js对象
+			$.parseXML()		用于将字符串解析为XML对象
+			$.makeArray()		将类似数组的对象转换为数组
+			$.merge()			第二个数组参数合并到第一个数组参数
+			$.now()				返回当前时间毫秒数
+		
+		判断数据类型的方法：
+			$.isArray()			是否为数组
+			$.isEmptyObject()	是否为空对象
+			$.isFunction()		是否为函数
+			$.isNumeric()		是否为数值
+			$.isPlainObject()	是否是使用{}|new Object生成对象
+			$.isWindow()		是否为window对象
+		
+		Ajax操作：
+			$.ajax(url[, options])	调用该方法，浏览器会向服务器发送HTTP请求
+				$.ajax({
+					async: true,
+					url: '',
+					type: 'GET',
+					data: {id: 123},
+					dataType: 'json',
+					timeout: 30000,
+					success: successCallback,
+					error: errorCallback,
+					complete: completeCallback,
+					stausCode: {
+						404: ,
+						500: 
+					}
+				});
+				accepts: 将本机所能处理的数据类型，告诉服务器
+				async：默认为true，是否发出同步请求
+				beforeSend：发出请求前，所要调用的函数
+				cache：默认为true，是否缓存数据，不会缓存POST请求数据
+				complete：指定HTTP请求结束时的回调函数
+				contentType：发送到服务器的数据类型
+				context：指定一个对象，作为所有ajax相关的回调函数的this对象
+				crossDmain：为true时，强制向相同域名发送跨域请求
+				data：向服务器发送的数据
+				datType：向服务器请求的数据类型，可为text、html、script、json、jsonp、xml
+				error：请求失败时的回调函数
+				headers：指定HTTP请求头信息
+				ifModified：为true时，只有服务器段内容与上次请求不一致，才会再次发出请求
+				mimeType：指定HTTP请求的mime类型
+				success：请求成功时的回调函数
+				type：向服务器发送信息所使用的HTTP动词，默认为GET,其他有POST、PUT、DELETE
+				url：服务器端地址
+				
+			简写方法：
+				$.get()			发出GET请求
+				$.post()		发出POST请求
+				$.getScript()	读取一个JavaScript脚本并执行
+				$.getJSON()		发出GET请求，读取一个JSON文件
+				$.fn.load()		读取一个html文件，并将其放入当前元素之中
+			
+			ajax方法规定，所有请求的地址类似"callback=?"的形式结尾，自动采用jsonp形式
+		
+	JQuery插件
+		原理：JQuery插件是定义在JQuery构造函数的prototype对象上面的一个方法，让所有JQuery对象实例共享
+		jQuery构造函数的prototype对象简写为：jQuery.fn对象
+			;(function($){
+				$.fn.xxx = function(){//xxx为插件名
+					//插件内容
+				};
+			})(jQuery);
+			在插件内部this指代jQuery对象，回调函数内指的是DOM对象
+			
+				
+				

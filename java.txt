@@ -1,0 +1,373 @@
+Java分三个体系JavaSE、JavaEE、JavaME
+特征：简单、面向对象、分布式、安全健壮、可移植等
+
+基本语法：
+注意：
+1.大小写敏感；
+2.类名首字母大写，多个单词组成，每个单词首字母大写
+3.方法名首字母小写，多个单词组成，之后每个单词首字母大写
+4.源文件名必须和类名相同
+
+java标识符
+类名、变量名、方法名都是标识符
+特点：
+	1.由数字、字母、美元符、下划线组成，但不能是数字开头
+	2.关键字不能是标识符
+	3.大小写敏感
+
+java修饰符
+	可访问修饰符：默认、public、protected、private
+	不可访问修饰符：final、abstract、strictfp
+
+java变量
+	局部变量、类变量(静态变量)、成员变量(非静态变量)
+	
+java数组
+	存储在堆上的对象，可以存储多个相同类型的数据
+	
+java关键字
+	具有特殊含义
+	
+java注释
+	单行注释	//
+	多行注释	/* ... */
+	文档注释	/** ... */
+	
+java对象和类
+	继承、多态、封装、抽象、类、对象、实例、方法
+	对象：对象是类的一个实例。有状态和行为。
+	类：类就是一个模板，描述一类对象的行为和状态
+	类中可以包含一下类型变量：
+		1.局部变量：方法、构造方法、语句块中定义的变量
+		2.成员变量：定义在类中，方法体之外的变量
+		3.类变量：声明在类中，方法体外，必须声明为static类型
+	构造方法：每个类都要有一个构造方法，默认有一个无参数构造方法
+	创建对象：对象是根据类创建的。使用new关键字创建新对象
+		声明、实例化、初始化
+	源文件声明规则：
+		1.一个源文件只能有一个public类，可以有多个非public类
+		2.源文件名称应该和public类名相同
+		
+		
+	
+	
+Java基本数据类型
+	创建变量需要向内存申请空间，来存储值。
+	内存可根据变量类型来为变量分配存储空间，且只能存储该类型值
+	两大类型：基本数据类型、引用数据类型
+		基本数据类型有八种：byte|short|int|long(整数型)、float|double(浮点型)、char、boolean
+	byte：1个字节8位、有符号。-128~127(-2^7~2^7-1)，默认值0
+	short：2个字节16位、有符号。-32768~32767(-2^15~2^15-1),默认值0
+	int：4个字节32位、有符号。-2^32~2^32-1，默认值0
+	long: 8个字节64位，有符号。-2^64~2^64-1,默认值0L或0l
+	float：4个字节32位，默认值0.0f或者0.0F
+	double：8个字节64位，默认值0.0
+	char：2个字节单一16位Unicode字符，
+	boolean：一个字节，值只能为true|false。默认值true
+	
+	引用类型默认值为null
+	
+	常量：是一个固定值
+	
+变量类型：
+	变量在使用前必须声明。格式：
+	数据类型 变量名 = 变量值; 或者 数据类型 变量名1,变量名2...;(可部分赋值)
+	局部变量：
+		声明在方法、构造函数、语句块中；访问修饰符不能用于局部变量；
+		作用范围就是在方法、构造函数、语句块中；执行创建，执行完成变量销毁；
+		局部变量没有默认值，必须初始化；分配在栈上
+	类变量(静态变量)：
+		声明在方法、构造函数、语句块外，类中以static关键字声明；
+		一个类无论创建多少个对象，类只有类变量的一份拷贝
+		静态变量存储在静态存储区
+
+Java修饰符：
+	访问修饰符、非访问修饰符
+	访问修饰符可以保护对类、变量、方法和构造方法的访问。
+		默认，同包可见
+		私有的（private）同一类可见，隐藏类的实现细节和保护类的数据，类和接口不能被声明为private
+		共有的（public）所有类可见
+		受保护的(protected)同一包的类和所有子类(包括不同包)可见，类和接口(变量和方法)不能被声明为private
+		在继承关系中，子类的访问权限不能低于父类；声明为private的方法不能被继承
+	非访问修饰符
+		static修饰符，用来创建类方法和类变量，静态方法不能访问非静态方法，反之可以
+		final修饰符，用来修饰类、方法和变量，修饰类不能被继承、方法不能重写、变量为常量
+		abstract修饰符，创建抽象类和抽象方法
+		synchronized和volatile用于线程
+	
+Java运算符
+	算术运算符、关系运算符、位运算符、逻辑运算符、赋值运算符、其他运算符
+	算术运算符：+、-、*、/、%、++、--
+	关系运算符：==、=!、>、<、>=、<=
+	位运算符：|、&、^、？、<<、>>、>>>、~
+	逻辑运算符：&&、||、!
+	赋值运算符：=、+=、-=、*=、/=、%=、>>=、<<=、&=、|=、^=
+	条件运算符：?:
+	instanceOf：操作对象实例，检查对象实例是否是一个特定类型
+	
+Java循环结构
+	while循环
+		while(布尔表达式){//循环体 }
+	do...while循环
+		do{//循环体 }while(布尔表达式);
+	for循环
+		for(初始化;布尔表达式;迭代){//循环体}
+	增强for循环（jdk5后）
+		for(声明语句 : 表达式){// 循环体}
+	continue关键字适用于任何循环结构，作用让循环结束本次跳到下一次
+	
+Java条件语句
+	if语句、switch语句
+	switch语句中表达式可为byte、short、int、char、String(jdk7后)、枚举
+	break关键字，主要用于循环或switch语句中，跳出整个语句块（跳出循环/switch语句）
+	
+Java Number类
+	成员方法：
+		xxxValue()			intValue()|doubleValue()...
+		compareTo()			比较
+		equals()			判断对象是否与参数相等
+		valueOf()			返回Integer
+		toString()			字符串形式返回
+		parseInt()			将字符串解析为int类型
+		
+Java Character类
+	类方法：
+		isLetter()			是否为字母
+		isDigit()			是否为数字
+		isWhitespace()		是否是空格
+		isUpperCase()		是否是大写
+		isLowerCase()		是否为小写
+		
+Java String类
+	创建String对象可通过构造方法和关键字
+		new String(char[] chs);
+		new String(String s);等
+	String类创建值不能改变，可通过StringBuffer或StirngBuilder修改
+	方法：
+		length()				字符串长度
+		concat(String str)		连接两个字符串(+也有相同作用)	
+		charAt(int index)		根据索引返回对应字符
+		compareTo(Stirng str)	比较
+		endsWith(String suffix)	是否指定后缀结尾
+		startsWith(String prefix)是否指定前缀结尾
+		getBytes()				将字符串以byte数组
+		indexOf(int ch)			指定字符第一次出现索引
+		intern()				字符串对象的规范化表示
+		lastIndexOf(int ch)		指定字符最后一次出现索引
+		replace(char oldCh,char newCh)将新的字符替换旧的
+		split(String tegex)		根据给定正则匹配拆分为字符串数组
+		substring(int begIn, int endIn)一个参数直接从指定索引到结束,截取子字符串
+		toCharArray()			将字符串转换为字符数组
+		trim()					去除字符串前后空白
+	创建输出格式化字符串
+		System.out.printf()和String.format()
+		
+Java StirngBuffer和StringBuilder
+	该对象能够被多次修改，不产生新对象，前者和后者最大区别是线程安全性不同
+		StringBuffer方法：
+			StringBuffer append(String s)		将指定字符串追加到字符串
+			StringBuffer reverse()				将字符串反转
+			delete(int start, int end)			移除子字符串
+			int capacity()						返回当前容量
+		
+Java 数组
+	存储固定大小的同类型元素
+	声明：
+		数据类型[] 变量名;
+	创建：
+		new 数据类型[数组长度];
+		new 数据类型{valu1,value2...}
+		{valu1,value2...}
+		数组的元素通过索引访问，索引从0开始
+		获取数组长度	length属性
+		遍历数组用基本循环或foreach循环
+			
+Java Arrays类
+	java.util.Arrays所有方法为静态方法
+	给数组赋值：通过fill方法
+	对数组排序：通过sort方法，升序
+	比较数组：equals方法
+	查找数组：binarySearch方法对排好序数组二分查找法
+		
+Java 日期时间
+	java.util.Date类
+		Date()当前日期时间初始化对象|Date(long mill)指定毫秒数时间从1970年1月1日
+		方法：
+			long getTime()		返回毫秒数
+			setTime(long mill)	设置毫秒数
+	SimpleDateFormat格式化日期
+		SimpleDateFormat sdf =  new SimpleDateFormat(String reg);//reg为日期格式yyyy-MM-dd HH:mm:ss
+		sdf.format(new Date()); //格式化
+		sdf.parse(String date); //解析时间字符串
+	Calendar类(抽象类)
+		Calendar cal = Calendar.getInstance();
+		set(int year, int month, int date);
+		get(Calendar.YEAR);...
+	GregorianCalendar
+		
+Java 正则表达式
+	[a-z]"匹配"a"到"z"范围内的任何小写字母。
+	[^a-z]"匹配任何不在"a"到"z"范围内的任何字符。
+	\d 数字字符匹配。等效于[0-9]。
+	{n} n是非负整数。正好匹配 n 次。
+	{n,} n 是非负整数。至少匹配 n 次。
+	{n,m} M 和 n 是非负整数，n≤m匹配至少 n 次，至多 m 
+	
+Java 方法
+	方法包含一个方法头和一个方法体。
+	修饰符 返回值类型 方法名(参数类型 参数名){
+		方法体
+		return 返回值;
+	}
+	方法是值传递，不是引用传递
+	方法重载：方法名相同，参数列表不同(参数列表指参数类型，顺序，个数不同)，返回值与重载无关
+	构造方法：用来初始化对象，名称和类名相同，无返回值。默认有一个无参构造方法，添加构造方法，默认消失
+	finallize()用来清除回收对象
+		
+Java 流、文件、IO
+	读取控制台输入：System.in
+	控制台输出;System.out.println()|print()
+	流被定义为一个数据序列。
+	OutputStream
+		FilterOutputStream
+			BufferedOutputStream
+			DataOutputStream
+			PrintStream
+		FileOutputStream
+		ByteArrayOutStream
+	InputStream
+		FilterInputStream
+			BufferdInputStream
+			DataInputStream
+			PushbackInputStream
+		FileInputStream
+		ByteArrayInputStream
+		StringBufferInputStream
+	InputStream f = new FileInputStream("c:/java/hello");
+	File f = new File("c:/java/hello");
+	InputStream is = new FileInputStream(f);
+	close()关闭流
+	int read(int r)		读到结尾返回-1
+	int read(byte[] r)
+	OutputStream f = new FileOutputStream("c:/java/hello");
+	File f = new File("c:/java/hello");
+	OutputStream is = new FileOutputStream(f);
+	close()关闭流
+	write(int w)
+	write(byte[] w)
+		
+	文件、IO
+		File类创建文件夹
+			mkdir()创建一个文件夹，成功为true
+			mkdirs()创建文件夹和它所有的父文件
+			isDirectory()判断文件是否为文件夹
+			list()获取包含的文件和文件夹
+		
+Java 异常处理
+	异常是程序中的一种错误
+	编译异常、运行时异常、错误
+	Exception类：所有异常类都是Exception类的子类，Exception类是Throwable类的子类，Throwable还有一个子类Error
+	Throwable主要方法：
+		getMessage()
+		printStackTrace()
+	捕获异常:
+		使用try/catch代码块对可能发生异常的地方进行保护
+		finally关键字，finally代码块，无论是否发生异常都会被执行
+		
+Java 面向对象
+	继承：一个对象从另一个对象获取属性的过程
+		继承是单一继承，一个子类只能有一个父类
+		所有java类都是由Object类继承而来，除Object类外，所有类只能有一个父类
+		
+		
+	
+	
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

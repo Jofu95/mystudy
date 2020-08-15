@@ -1,0 +1,339 @@
+C语言
+	特点：易于学习、结构化语言、可产生高效率程序、可处理底层活动、可在多种计算机平台编译
+	C语言可开发操作系统，语言编译器，汇编器，文本编译器，打印假脱机，网络驱动，现代程序，数据库
+	主要成分：
+		预处理器指令、函数、变量、语句&表达式、注释
+	#include <stdio.h>
+	int main()
+	{
+		printf("Hello,world!\n");
+		return 0;
+	}
+	#include <stdio.h>是预处理指令，告诉编译器编译前要包含stdio.h文件
+	int main()是主函数，程序开始执行入口
+	
+	基本语法：
+		分号(;)是语句结束符，每个语句必须以分号结束
+		注释/* */帮助解释说明，编译器忽略
+		标识符是一个名称以字母大小写下划线开头，后面由字母下划线和数字组成。不允许标点符号，区分大小写
+		关键字有特殊含义的标识符，不能用来做普通标识符
+	数据类型：
+		数据类型是指用于声明不同类型的变量或函数的一个系统，变量类型决定了变量存储占用空间
+		基本类型：整数类型、浮点类型
+		枚举类型
+		void类型
+		派生类型：指针类型、数组类型、结构类型、共用体类型和函数类型
+	
+		整数类型
+			char(1byte 0~255或-128~127)、unsigned char(1byte 0~255)、signed char(1byte -128~127)
+			short(2byte)、unsigned short(2byte)
+			int(2或4byte)、unsigned int
+			long(4byte)、unsigned long(4bytes)
+		可使用sizeof(type)获取对象或类型的存储字节大小
+		
+		浮点类型
+			floa(4byte)			精度6位小数
+			double(8byte)		精度15位小数
+			long double(10byte) 精度19位小数
+			
+		void类型
+			函数返回为空、函数参数为空、指针指向为void
+	
+	变量：
+		声明变量：数据类型 变量；变量可是多个标识符，用逗号隔开
+	常量：
+		整数常量：
+			前缀指定基数，0x或0X表示十六进制，0表示八进制，默认不带是十进制
+			后缀U和L组合，U表示无符号证书，L表示长整数
+		浮点常量
+		字符常量:如，'x'、'\t'、'\u0000'
+		字符串常量："hello"
+		
+		定义常量：
+			1.使用#define预处理器；2.使用const关键字
+			
+	存储类：
+		定义c程序中变量/函数的范围和生命周期
+		auto、register、static、extern
+		
+		auto存储类是所有局部变量默认的存储类
+		register存储类用于定义存储在寄存器中的局部变量，不能用&运算符因为它没有内存位置
+		static存储类指示编译器在程序的生命周期内保持局部变量的存在
+		extern存储类用于提供一个全局变量的引用，对所有程序文件可见
+	
+	运算符：
+		算术运算符：+、-、*、/、%、++、--
+		关系运算符：==、!=、>、<、>=、<=
+		逻辑运算符：&&、||、!
+		位运算符：&、|、^、~、<<、>>
+		赋值运算符
+		sizeof()、&、*、?:
+		
+	条件语句：if、if...else、switch
+	
+	循环：do...while、while、for(无限循环for(;;))
+	
+	函数：
+		定义函数
+			返回值类型 函数名(参数列表)
+			{
+				函数体
+			}
+		函数是值传递
+	
+	作用域：
+		1.在函数或块内部的局部变量
+		2.在所有函数外部的全局变量
+		3.在形参的函数参数定义中
+		局部变量和全局变量的名称可以相同，但在函数内，局部变量会覆盖全局变量的值
+		局部变量定义要对其初始化，全局变量系统会自动初始化 int|float|double 为0，char为'\0'，pointer为null
+		
+	数组：
+		数组是用来存储一系列数据，存储固定大小的同类型元素的顺序集合，数组中的元素通过索引来访问(从0开始)
+		数组声明：数据类型[] 数组名;
+		初始化数组：数据类型[] 数组名 = {value1, value2,...}
+		数组长度：sizeof(arr)/sizeof(*arr)
+	
+	指针：
+		&+变量  可输出定义的变量地址
+		指针是一个变量，值为另一个变量的地址，即内存位置的直接地址
+		指针声明： 指针基类型 *指针变量名称;(*用来指定一个变量是指针)
+		使用指针：
+			定义一个指针变量、变量地址赋值给指针、访问指针变量中可用地址值
+		变量声明时，为指针变量赋值为NULL，防止没有确切地址可赋值，赋值为NULL的指针为空指针
+		NULL指针是一个定义在标准库中值为0的常量。
+		
+	C字符串：
+		字符串实际上是使用null字符'\0'终止的一维字符数组
+		strcpy(s1,s2);			复制字符串s2到字符串s1
+		strcat(s1,s2);			链接字符串s2到字符串s1的末尾
+		strlen(s1);				返回字符串s1长度
+		strcmp(s1,s2);			比较s1和s2相同返回0，s1<s2返回小于0；
+		strchr(s1,ch);			返回一个指针，指向字符串s1中字符ch第一次出现的位置
+		strstr(s1,s2);			返回一个指针，指向字符串s1中字符串s2的第一次出现的位置
+		
+	C结构体：
+		是一种允许用户自定义的可用数据类型，允许存储不同类型的数据项
+		定义结构：
+		  struct [结构体类型]
+		  {
+			结构成员;
+		  } [一个或多个结构变量];
+		访问结构成员 结构体变量.结构成员
+		指向结构的指针	struct Books *book;
+			结构指针访问结构成员使用 -> 运算符，struct_pointer -> title
+		位域是把一个字节中的二进位划分为几个不同的区域，并说明每个区域的位数。
+		位域定义：
+			struct 位域结构名
+			{
+				位域列表
+			};
+			位域列表形式：类型说明符 位域名: 位域长度
+			位域使用：位域变量名.位域名
+	
+	共用体：
+		允许在相同内存位置存储不同数据类型
+		定义共用体：
+			union [共用体类型]
+			{
+				共用体成员
+			} [一个或多个共用体变量];
+		访问共用体：共用体变量.共用体成员
+		同一时间内使用一个变量，否则会对精度右损失
+	
+	C typedef:
+		为类型取一个新名字
+		使用：typedef 数据类型 新数据类型名
+		typedef 和 #define：
+			typedef 仅限于为类型定义符号名称，#define不仅可为类型定义别名，也可为数值定义别名
+			typedef 是由编译器执行解释的，#define 语句是由预编译器进行处理的
+			
+	C 输入 & 输出
+		标准文件：
+			c语言把所有设备都当做文件。所以设备被处理的方式与文件相同。
+			标准文件	文件指针	设备
+			标准输入	 stdin		键盘
+			标准输出	 stdout		屏幕
+			标准错误	 stderr		屏幕
+		gethcar() & putchar()函数
+			int getchar(void) 从屏幕读取下一个可用字符，并把他返回为一个整数。同一时间内读取单一的字符
+			int putchar(int c) 把字符输出到屏幕，并返回相同的字符。同一时间内输出单一的字符
+		gets() & puts() 函数
+			char *gets(char *s)从stdin读取一行到s所指定的缓冲区，直到一个终止符或EOF
+			int puts(const char *s)把字符串s和一个尾随的换行符写入到stdout
+		scanf() & printf()函数
+			int scanf(const char *format,...)从标准输入流stdin读取输入，并根据提供的format来浏览输入
+			int printf(const char *format,...)把输出写入到标准输出流stdout，并根据提供的格式产生输出
+			format是常量字符串
+			
+	C文件读写
+		打开文件：
+			FILE *fopen(const char * filename, const char *mode);
+			filename是字符串，用来命名文件，访问模式mode值如下：
+				f		打开已有文件，允许读取文件
+				w		打开文本文件，允许写入文件，不存在就创建新文件
+				a		打开文本文件，以追加模式写入文件
+				r+		打开文本文件，允许读写文件
+				w+		打开文本文件，允许读写文件，文件存在，覆盖
+				a+		打开文本文件，允许读写文件，读取开头开始，写入则是追加
+		关闭文件：
+			int fclose(FILE *fp); 关闭成功返回0，否则EOF
+		写文件：
+			int fputc(int c, FILE *fp);把c的字符写入到fp所指向的输出流中，成功返回该字符，否则EOF
+			int fputs(const char *s, FILE *fp);
+			int fprintf(FILE *fp, const char *format,...);
+		读取文件：
+			int fgetc(FILE  *fp);
+			char *fgets(char *buf, int n, FILE *fp);
+			int fsacnf(FILE *fp, const char *format,...); 遇到第一个空格停止读取
+		二进制I/O函数：
+			
+	C预处理器
+		CPP,只是一个文本替换工具，指示编译器在实际编译前完成所需的预处理
+		#define 		定义宏
+		#include		包含一个源代码文件
+		#undef			取消宏定义
+		#ifdef			宏定义定义，返回真
+		#ifndef			宏定义没定义，返回真
+		#if				条件为真，则编译下面代码
+		#else			#if的替代方案
+		#elif			
+		#endif			结束一个#if...#else条件编译块
+		#error			标准错误，输出错误信息
+		#pragma			使用标准方法，向编译器发布特殊命令
+		
+	头文件
+		头文件是扩展名为.h的文件，包含了c函数声明和宏定义，被多个源文件中引用共享
+		使用头文件：#include <file> 引入系统文件；#include "file" 引入用户头文件
+		只引用一次头文件，
+			#ifndef HEADER_FILE
+			#define HEADER_FILE
+			
+			#endif
+		条件引用，
+			#if SYSTEM_1
+				#include "system_1.h"
+			#elif SYSTEM_2
+				#include "system_2.h"
+			#elif SYSTEM_3
+				...
+			#endif
+	
+	强制类型转换
+		把变量从一种类型转换为另一种数据类型，(类型名)表达式
+		强制类型转换运算符优先级大于除法
+	
+	错误处理
+		发生错误时，大多数c函数调用返回1或NULL，同时设置一个错误代码errno，改代码为全局变量
+		初始化时，把errno设置为0，表示程序中没有错误
+		errno、perror()和strerror()
+			perror()显示函数传入的字符串，后跟一个冒号、一个空格和当前errno值的文本形式
+			strerror()返回一个指针，指针指向当前errno值的文本表示形式
+		程序退出状态：exit(0|EXIT_SUCCESS)正常退出；exit(-1|FAILURE)出现错误退出
+	
+	C递归
+		以自相似的方式重复项目的处理过程
+	
+	C可变参数
+		int func(int num,...){...}	省略号前的参数总为int，表示参数个数(引入头文件stdarg.h)
+		头文件stdarg.h定义类型va_list vl变量存储参数，va_start(va_list vl,int num)将vl初始化为一个参数列表
+		通过定义的va_arg(va_list vl, int)访问参数
+	
+	C内存管理（stdlib.h）
+		动态分配内存
+			void *calloc(int num,int size);		分配带有num个元素的数组，每个元素大小为size字节
+			void *malloc(int num);				分配一个num字节的数组，并把它们进行初始化
+		重新调整内存大小和释放内存
+			void *realloc(void *address,int newsize);重新分配内存，把内存扩展到newsize
+			void free(void *address);			释放address所指向的h内存块
+	
+	C命令行参数
+		main(int argc, char *argv[]);
+		argc是命令行参数个数
+		argv[]是一个指针数组，指向传递给程序的每个参数
+		argv[0]存储程序名称，argv[1]指向第一个命令行参数，argv[n]指向最后一个命令行参数
+	
+	C排序算法
+		冒泡排序(bubble sort)(升序排序)：两个相邻元素相互比较，前者比后者大就交换位置
+		选择排序(selection sort)：
+			首先在未排序序列中找到最小(大)元素，存放到排序序列起始位置，
+			然后再从剩余未排序序列中继续找到最小(大)元素，放到已经排序序列的末尾。以此类推
+		插入排序(insertion sort)：
+			
+			
+		
+	
+	
+	C标准库 <stdio.h>
+		头文件中定义了三个变量类型、一些宏和各种函数来执行输入和输出
+		库变量：
+			size_t			无符号整数类型,sizeof关键字结果
+			FILE			适合存储文件流信息的对象类型
+			fpos_t			适合存储文件中任何位置的对象类型
+		库宏：
+			NULL			空指针常量的值
+			_IOFBF、_IOLBF、_IONBFZ整型常量表达式
+			BUFSIZ			整数
+			...
+			stderr、stdin、stdout指向FILE类型指针
+		库函数：
+			int fclose(FILE *stream);关闭流stream，刷新所有缓冲区
+				stream是指向FILE对象的指针
+				关闭成功返回0，关闭失败返回EOF
+			
+			void clearerr(FILE *stream);清除给定流stream的文件结束和错误标识符
+				当检测到参数不为有效流，则返回-1，并设置errno为EBADF
+			
+			int feof(FILE *stream);测试给定流stream的文件结束标识符
+				设置了与流相关的文件结束标识符，返回非零值，否则返回0
+				
+			int ferror(FILE *stream);测试给定流stream的结束标识符
+				设置了与流关联的错误标识符，返回非零值，否则返回0
+	
+			int fflush(FILE *stream);刷新流stream的输出缓冲区
+				成功，返回0，错误返回EOF，且设置错误标识符feof
+				
+			
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
