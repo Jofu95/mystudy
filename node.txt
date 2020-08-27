@@ -1,10 +1,13 @@
-Node.js是运行在服务器端的JavaScript
-Node.js是一个事件驱动I/O服务端JavaScript环境
+Node.js是一个事件驱动、非阻塞I/O模型
+Node.js是基于Chrome V8引擎的JavaScript运行环境环境
 
 Node.js组成部分：
     1.引入required模块：使用require指令来载入Node.js模块
     2.创建服务器：服务器可以监听客户端请求，类似于Apache、Nginx等HTTP服务器
     3.接受请求与响应请求：服务器很容易创建，客户端可以使用浏览器或终端发送HTTP请求，服务器接收请求后返回响应数据
+
+模块/包与CommonJS
+    node.js模块：1.内置Node.js模块 2.第三方Node.js模块 3.字定义Node.js模块
 
 创建Node.js应用
     一、引入required模块
@@ -94,16 +97,16 @@ EventEmitter
     引入events模块 - var events = require("events");
     创建eventEmitter对象 - var eventEmitter =  new events.EventEmitter();
 
-    addListener(event, listener) - 为指定事件添加一个监听器到监听数组的尾部
-    on(event, listener) - 为指定事件注册一个监听器，接收一个字符串事件名，和回调函数
-    once(event, listener) - 为指定事件注册一个单次监听器，触发一次后接触该监听器
-    removeListener(event, listener) - 移除指定事件的某个监听器，必须为已经注册过的监听器
-    removeAllListeners([event]) - 移除所有监听器，[event]为指定事件监听器
+    addListener(eventname, listenercallback) - 为指定事件添加一个监听器到监听数组的尾部
+    on(eventname, listenercallback) - 为指定事件注册一个监听器，接收一个字符串事件名，和回调函数
+    once(eventname, listenercallback) - 为指定事件注册一个单次监听器，触发一次后接触该监听器
+    removeListener(eventname, listenercallback) - 移除指定事件的某个监听器，必须为已经注册过的监听器
+    removeAllListeners([eventname]) - 移除所有监听器，[eventname]为指定事件监听器
     setMaxListeners(n) - 设置监听器最大数量，默认10个
-    listeners(event) - 返回指定事件的监听器数组
-    emit(event) - 触发事件
+    listeners(eventname) - 返回指定事件的监听器数组
+    emit(eventname) - 触发事件
 
-    类方法 - events.emitter.listenerCount(event) 返回指定事件的监听器数量
+    类方法 - events.emitter.listenerCount(eventname) 返回指定事件的监听器数量
     error事件
 
 Buffer
@@ -153,7 +156,7 @@ Buffer
     缓冲区长度：buf.length - 返回Buffer对象所占内存长度
 
 Stream
-    抽象接口，流有四种类型；
+    抽象接口，流有四种类型:
         Readable - 可读操作
         Writable - 可写操作
         Duplex   - 可读写操作
@@ -165,7 +168,7 @@ Stream
         finish-所有数据已被写入到底层系统时触发
     
     var fs = require('fs');
-    从流种读取数据：
+    从流中读取数据：
         创建可读流 - var readerStream = fs.createReadStream(string filename); 返回可读流对象
         处理流事件 - data、end、error
     将流写入：
@@ -259,8 +262,8 @@ Stream
 
     util.inherits(constructor, superConstructor) - 实现对象间原型继承的函数
     只能继承在原型中定义的函数,属性
-
     util.inspect(object, [showHidden], [depth], [colors]) - 将任意对象转换为字符串
+    
     util.isArray(object) - object是否为数组
     util.isRegExp(object) - object是否为正则表达式
     util.isDate(object) - object是否为日期
@@ -329,12 +332,6 @@ GET/POST请求
     获取POST请求内容：
         POST请求内容全部在请求体中
 
-
-
-
-
-
-
 OS模块
     os模块提供了一些基本的系统操作函数，引入该模块
         require('os');
@@ -353,3 +350,14 @@ OS模块
         os.cpus() - 对象数组，每个cpu信息
         os.networkInterfaces() - 网络接口列表
 
+多线程
+    node.js是单线程模式运行，但它使用事件驱动来处理并发，有助于创建多个子进程提高性能
+    子进程带有三个流对象：child.stdin,child.stdout,child.stderr
+    Node提供了child_process模块创建子进程，方法：
+        exec() - child_process.exec() 使用子进程执行命令，缓存子进程的输出，并将子进程输出以回调函数参数的形式返回
+        spawn() = child_process.spawn() 使用指定命令行参数创建新进程
+        fork() - child_process.fork() 是spawn() 特殊形式用于在子进程中运行的模块。
+            会在父进程和子进程之间，建立通信管道，用于进程间通信
+            如：fork('./son.js')相当于spawn('node', ['./son.js'])
+
+    

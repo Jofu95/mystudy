@@ -12,11 +12,12 @@ VUE只关注视图层，采用自底向上增加开发的设计
         el - DOM元素的id
         data - 定义属性
         methods - 定义函数
+        ...
     {{ }} - 用于输出对象属性和函数值
 
 当Vue实例被创建，相应属性都被渲染到页面上，当属性值发生变化，页面也会发生相应变化
 
-vue内部提供了一些实例属性与方法，前缀$,便于与自定义区分（vue构造器外加前缀$）
+vue内部提供了一些实例属性与方法，前缀$,便于与自定义区分
 
 模板语法：
     基于html模板语法，允许声明式的将DOM绑定到底层vue的实例的数据
@@ -31,14 +32,14 @@ vue内部提供了一些实例属性与方法，前缀$,便于与自定义区分
     指令：
         带有 v- 前缀的特殊属性
     参数：
-        参数在指令后一冒号指明
+        参数在指令后以冒号指明
     修饰符：
         .修饰符 
     用户输入：
         表单控件input输入框中使用 v-model 指令实现双向数据绑定
     过滤器：
-        管道符 |   {{ message | filter}} 第一个为参数，第二个为filter为过滤器
-        过滤去可以有多个，过滤器可接收参数
+        管道符 |   {{ message | filter}} 第一个为参数，第二个为filter过滤器
+        过滤器可以有多个，过滤器可接收参数
     缩写：
         vue为 v-bind指令缩写为 : , v-on指令缩写为 @
 
@@ -48,7 +49,7 @@ vue内部提供了一些实例属性与方法，前缀$,便于与自定义区分
         v-else               添加else块
         v-else-if="value"    添加else if块
         v-show="value"       是否显示数据 value为0、null、undefined、false、''为假
-        需要频繁切换使用 v-show  ;条件变化不大使用 v-if
+        需要频繁切换使用 v-show ;条件变化不大使用 v-if
         v-if与v-show区别：
             v-if是动态添加，为false时，完全移除该元素，dom树中不存在
             v-show仅隐藏/显示，为false时，依旧存在dom树中，若原有样式设置了display：none，会出错
@@ -79,8 +80,8 @@ vue内部提供了一些实例属性与方法，前缀$,便于与自定义区分
 样式绑定：
     v-bind设置样式属性，v-bind:属性="表达式" 表达式结果类型除字符串外还可是对象或数组
     class属性绑定，
-        v-bind:class="{'类名1': boolean,'类名2': boolean,..}" 相同样式前者会覆盖
-        v-bind:class="classObject"          把一个对象传给v-bind:class,对象属性为类名，值为boolean值
+        v-bind:class="{'类名1': boolean,'类名2': boolean,..}" 相同样式前者会被覆盖
+        v-bind:class="classObject"          把一个对象传给v-bind:class,对象属性为类名，值为boolean
         v-bind:class="[value1,value2,...]"  把一个数组传给v-bind:class,数组元素为别名属性，别名值为类名
         v-bind:class="[value1,value?value2:'']" 
     style(内联样式)：
@@ -213,3 +214,139 @@ vue内部提供了一些实例属性与方法，前缀$,便于与自定义区分
             <router-link :to="{ path: '/foo'}" exact-active-class="类名"></router-link>
         event - 声明可用来触发导航的事件
             <router-link :to="{ path: '/route1'}" event="mouseover"></router-link>
+    
+Ajax(axios):
+    Axios是一个基于Promise的HTTP库，可用在浏览器可node.js中
+    引入axios的js文件
+    get请求：(response.data读取JSON数据)
+        axios.get(URL)
+        .then(res => {
+            res.data
+        })
+        .catch((err) => {...});
+        传递参数：
+            可直接在URL上添加参数；也可通过params设置参数
+            axios.get(URL, {
+                params: {
+                    ID: 12345
+                }
+            })
+            .then(res => {
+                res.data
+            })
+            .catch((err) => {...});
+    POST请求：
+        axios.get(URL)
+        .then(res => {
+            res.data
+        })
+        .catch((err) => {...});
+        传递参数：
+            axios.get(URL, {
+                ID: 12345
+            })
+            .then(res => {
+                res.data
+            })
+            .catch((err) => {...});
+    执行多个并发请求：
+        axios.all(iterable)
+        axios.spread(callback)
+    
+        function fun1(){
+            return axios.get(url1);
+        }
+        function fun2(){
+            return axios.get(trl2);
+        }
+        axios.all([func1(), func2()])
+        .then(axios.spread(function(value1, value2){
+               ... 
+        }));
+    Axios API:
+        可通过axios传递相关配置来创建请求
+        axios(config);
+            POST请求：
+                axios({
+                    method: 'post',
+                    url: '',
+                    data: {
+
+                    }
+                });
+            GET请求：(请求远程图片)
+                axios({
+                    method: 'get',
+                    url: '',
+                    responseType: 'stream'
+                }).then(res => {
+                    ...
+                })
+        axios(url[, config]);
+            axios(url);
+    响应结构：
+        then(function(response){...})回调函数的参数response
+            response.data   -  服务端响应的数据
+            
+    拦截器：（请求或响应在被then或catch处理前拦截）
+        //添加请求拦截器
+        axios.interceptors.request.use(function(config){
+            //发送请求之前
+            return config;
+        }, function(err){
+            //请求错误时处理
+            return Promise.reject(err);
+        });
+
+        //提娜佳响应拦截器
+        axios.interceptors.response.use(function(response){
+            //响应数据
+            return response;
+        }, function(err){
+            //响应出错处理
+            return Promise.reject(err);
+        });
+    移除拦截器：
+        axios.interceptors.request.eject(reqInterceptor);
+        axios.interceptors.response.eject(resInterceptor);
+
+Ajax(vue-resouce):
+    Vue要实现异步加载需要使用vue-resouce库
+    GET请求：
+        get: function(){
+            this.$http.get(url).then(function(res){...}, function(){})
+        }
+        传递参数：
+        this.$http.get(url, {params: jsonData}).then(function(res){...}, function(){})
+            jsonData是传入后端的参数
+    POST请求：
+        post: function(){
+            this.$http.post(url, {...}, {emulateJSON: true}).then(function(res){...}, function(){})
+        }
+        emulateJSON作用：如果web服务器无法处理编码为application/json 的请求。可以启用emulateJSON
+    语法&API:
+        可以使用全局Vue.http或者在Vue实例中使用this.$http来发起HTTP请求
+        基于全局Vue：
+            Vue.http.get(url, [options]).then(successCallback, errCallback);
+            Vue.http.post(url, [body], [options]).then(successCallback, errCallback);
+        基于Vue实例内部：
+            this.$http.get(url, [options]).then(successCallback, errCallback);
+            this.$http.poat(url, [body], [options]).then(successCallback, errCallback);
+
+
+响应接口：
+    Vue可以添加数据动态响应接口，例如利用$watch实现对数据的监听
+    Vue不允许在已经创建的实例上动态添加新的响应式属性
+    Vue不能检测到对象属性的添加和删除
+    运行过程中实现添加或者删除，可以使用全局Vue，Vue.set和Vue.delete
+    Vue.set
+        方法用于设置对象的属性，可解决Vue无法检测添加属性的限制
+        Vue.set(target, key, value)
+            target - 对象或数组
+            kay - 字符串或数字
+            value = 任意类型
+    Vue.delete
+        用于删除动态添加的属性
+        Vue.delete(target, key)
+            target - 对象或数组
+            kay - 字符串或数字
