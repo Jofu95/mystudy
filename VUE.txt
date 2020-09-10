@@ -1,0 +1,352 @@
+VUE是一套构建用户界面的渐进式框架
+VUE只关注视图层，采用自底向上增加开发的设计
+
+引入vue.js文件，构建大型应用建议使用NPM安装vue
+
+语法格式：
+    每个Vue应用都需要通过实例化Vue来实现
+    var vm = new Vue({
+        ...
+    });
+    构造其中参数：
+        el - DOM元素的id
+        data - 定义属性
+        methods - 定义函数
+        ...
+    {{ }} - 用于输出对象属性和函数值
+
+当Vue实例被创建，相应属性都被渲染到页面上，当属性值发生变化，页面也会发生相应变化
+
+vue内部提供了一些实例属性与方法，前缀$,便于与自定义区分
+
+模板语法：
+    基于html模板语法，允许声明式的将DOM绑定到底层vue的实例的数据
+    插值：
+        文本插值 {{...}}
+    html:
+        v-html - 输出html代码
+    属性：
+        v-bind - html属性值
+    表达式：
+        {{...}} 在双花括号内支持js表达式操作
+    指令：
+        带有 v- 前缀的特殊属性
+    参数：
+        参数在指令后以冒号指明
+    修饰符：
+        .修饰符 
+    用户输入：
+        表单控件input输入框中使用 v-model 指令实现双向数据绑定
+    过滤器：
+        管道符 |   {{ message | filter}} 第一个为参数，第二个为filter过滤器
+        过滤器可以有多个，过滤器可接收参数
+    缩写：
+        vue为 v-bind指令缩写为 : , v-on指令缩写为 @
+
+条件与循环：
+    条件判断： v-if 、 v-else 、 v-else-if
+        v-if="value"         value为true将内容插入，否则不插入
+        v-else               添加else块
+        v-else-if="value"    添加else if块
+        v-show="value"       是否显示数据 value为0、null、undefined、false、''为假
+        需要频繁切换使用 v-show ;条件变化不大使用 v-if
+        v-if与v-show区别：
+            v-if是动态添加，为false时，完全移除该元素，dom树中不存在
+            v-show仅隐藏/显示，为false时，依旧存在dom树中，若原有样式设置了display：none，会出错
+    循环语句：v-for
+        v-for="site in sites"  site元素迭代别名 sites是源数据
+        v-for="value in object"
+        v-for-"(value, key) in object"
+        v-for-"(value, key, index) in object"
+
+计算属性：
+    计算属性关键词：computed
+    computed: {
+        xxx: function(){
+            ...
+        }
+    }
+    与methods效果相同，但前者是基于依赖缓存，相关依赖发生改变才会重新获值，后者每次都会调用
+
+监听属性：watch
+    通过watch来响应数据的变化，
+    watch: {
+        xxx: function(val){
+            ...
+        }
+    }
+    var vm = new Vue({...}); vm.$watch(value, function(nval, oval){...})
+
+样式绑定：
+    v-bind设置样式属性，v-bind:属性="表达式" 表达式结果类型除字符串外还可是对象或数组
+    class属性绑定，
+        v-bind:class="{'类名1': boolean,'类名2': boolean,..}" 相同样式前者会被覆盖
+        v-bind:class="classObject"          把一个对象传给v-bind:class,对象属性为类名，值为boolean
+        v-bind:class="[value1,value2,...]"  把一个数组传给v-bind:class,数组元素为别名属性，别名值为类名
+        v-bind:class="[value1,value?value2:'']" 
+    style(内联样式)：
+        v-bind:style="{color: value1,fontSize: value2,...}"
+        v-bind:style="styleObject"          直接绑定一个对象，对象属性和值为对应样式
+        v-bind:style="[styleObject1,styleObject2,...]"
+
+事件处理器：
+    事件监听使用v-on指令
+    v-on:click=""       点击事件
+    可接受一个方法来调用js方法 v-on:click="func"
+    可接受内联js语句 v-on:click="func('xxx')"  v-on:click="func('xxx',$event)"
+
+    事件修饰符：修饰符可以串联
+        v-on提供事件修饰符处理DOM事件细节，使用 . 表示指令后缀来调用修饰符
+        .stop = 阻止冒泡
+        .prevent - 阻止默认事件
+        .capture - 阻止捕获
+        .self - 只监听触发该元素的是事件
+        .once - 只触发一次
+        .left - 左键事件
+        .left - 右键事件
+        .middle - 中间滑轮事件
+    按键修饰符：
+        监听键盘事件时添加按键修饰符
+        v-on:keyup.enter=""
+        v-on:keyup.tab=""
+        v-on:keyup.delete=""
+        v-on:keyup.esc=""
+        v-on:keyup.space=""
+        v-on:keyup.up=""
+        v-on:keyup.down=""
+        v-on:keyup.left=""
+        v-on:keyup.right=""
+        v-on:keyup.ctrl=""
+        v-on:keyup.alt=""
+        v-on:keyup.enter=""
+        v-on:keyup.shift=""
+
+表单：
+    使用v-model指令在表单控件元素上创建双向数据绑定
+    input/textarea v-model直接绑定控件文本值的属性
+    checkbox    v-model绑定的多个checbox相同的v-model
+    radio       
+    select
+    修饰符 
+        .lazy  - v-model在input事件中同步输入框，可使用该修饰符，改变事件为change
+        .number - 自动将用户输入值转换为Number类型
+        .trim - 自动过滤用户输入的首位空格
+
+组件：
+    组件可扩展HTML元素，封装可重用的代码
+    注册一个全局的组件语法：
+        Vue.component(tagName, options)
+            tagName - 组件名   options - 配置选项
+    通过 <tagName> </tagName> 调用
+
+    注册一个局部的组件 components: {  tagName: { options  }   }
+
+    Prop是子组件接收父组件传递过来的数据的一个自定义属性
+        父组件数据通过props把数据传递给子组件，子组件需要显式的用props选项声明prop
+    动态Prop
+        v-bind动态绑定props的值到父组件的数据中，每当父组件的值发生变化时，变化传到子组件
+        prop是单向绑定：当父组件属性变化时，将传导给子组件，但不会反过来
+    Prop验证
+        组件为props指定验证要求，为props中的值提供一个带有验证需求的对象
+
+自定义事件：
+    父组件通过props传递数据给子组件，子组件要把数据传递回去就要自定义事件
+    通过 v-on 绑定自定义事件，每个Vue实例都实现了事件接口,即：
+        使用 $on(eventName) 监听事件
+        使用 $emit(eventName) 触发事件
+    组件内data必须是一个函数
+    某个组件的根元素监听一个原生事件，可使用 .native修饰 v-on
+    自定义组件 v-model:
+        <input v-model="parentData"> 等价于
+        <input :value="parentData" @input="parentData=$event.target.value">
+    
+自定义指令：
+    Vue.directive(tagName, options)
+        tagName - 指令 v- 后缀
+    局部指令：
+        在实例中使用 directives: { tagName: { options  }   }
+    
+    钩子：
+        钩子函数：
+            bind - 只调用一次，指令第一次绑定到元素时调用。用钩子函数可定义一个在绑定时执行一次的初始化动作
+            inserted - 被绑定的元素插入到父节点时调用
+            update - 被绑定元素所在的模板更新时调用，不论值是否变化
+            componentUpdated - 被绑定元素所在模板完成一次更新周期时调用
+            unbind - 只调用一次，指令于元素解绑时调用
+        钩子函数参数：
+            el - 指令所绑定的元素，可直接操作DOM
+            binding - 一个对象，包含以下属性：
+                name - 指令名，不包括v-前缀
+                value - 指令绑定值，指令后的值
+                oldValue - 指令绑定前一个值，仅在update和componentUpdated函数中使用
+                expression - 绑定值的表达式或变量名
+                arg - 传给指令的参数
+                modifiers - 一个包含修饰符的对象
+            vnode - Vue编译生成的虚拟节点
+            oldVnode - 上一个虚拟节点，仅在update和componentUpdated函数中使用
+        只需一个钩子函数时可简写：
+            Vue.directive(tagName, function(el, binding)){
+                ...
+            }
+
+路由：
+    路由允许通过不同的URL访问不同的内容
+    下载vue-router.js文件并引入 或使用npm
+    <router-link> 是一个组件，用于设置一个导航链接，切换不同HTML内容，to属性为目标地址，即要显示的内容
+    <router-link>相关属性：
+        to - 表示目标路由链接，点击后，内部会把to值传到router.push()
+            <router-link to="home">Home</router-link> 渲染成 <a href="home">Home</a>
+            <router-link :to="home">Home</router-link>
+            <router-link :to="{ path: 'hame'}">Home</router-link>
+            命名的路由
+            <router-link :to="{ name: 'user', params: {userID: 123}}">uSER</router-link>
+            带查询参数 /register?plain=private
+            <router-link :to-"{ path: 'register', query: { plain: 'private' } }"></router-link>
+        replace - 点击时会调用router.replace()，导航后不会留下历史记录
+            <router-link :to="{ path: '/abc' }" replace></router-link>
+        append - 在当前路径前添加路径
+            <router-link :to="{ path: 'relative/path' }" append></router-link>
+        tag - 渲染成某种标签 tag="标签",还是会监听点击，触发导航
+            <router-link :to="/foo" tag="li"></router-link>
+        active-class  -  链接激活时使用CSS类名
+            <router-link :to="{ path: '/foo' }" active-class="类名"></router-link>
+        exact-active-class  -  配置当链接被精准匹配时应该激活的class
+            <router-link :to="{ path: '/foo'}" exact-active-class="类名"></router-link>
+        event - 声明可用来触发导航的事件
+            <router-link :to="{ path: '/route1'}" event="mouseover"></router-link>
+    
+Ajax(axios):
+    Axios是一个基于Promise的HTTP库，可用在浏览器可node.js中
+    引入axios的js文件
+    get请求：(response.data读取JSON数据)
+        axios.get(URL)
+        .then(res => {
+            res.data
+        })
+        .catch((err) => {...});
+        传递参数：
+            可直接在URL上添加参数；也可通过params设置参数
+            axios.get(URL, {
+                params: {
+                    ID: 12345
+                }
+            })
+            .then(res => {
+                res.data
+            })
+            .catch((err) => {...});
+    POST请求：
+        axios.get(URL)
+        .then(res => {
+            res.data
+        })
+        .catch((err) => {...});
+        传递参数：
+            axios.get(URL, {
+                ID: 12345
+            })
+            .then(res => {
+                res.data
+            })
+            .catch((err) => {...});
+    执行多个并发请求：
+        axios.all(iterable)
+        axios.spread(callback)
+    
+        function fun1(){
+            return axios.get(url1);
+        }
+        function fun2(){
+            return axios.get(trl2);
+        }
+        axios.all([func1(), func2()])
+        .then(axios.spread(function(value1, value2){
+               ... 
+        }));
+    Axios API:
+        可通过axios传递相关配置来创建请求
+        axios(config);
+            POST请求：
+                axios({
+                    method: 'post',
+                    url: '',
+                    data: {
+
+                    }
+                });
+            GET请求：(请求远程图片)
+                axios({
+                    method: 'get',
+                    url: '',
+                    responseType: 'stream'
+                }).then(res => {
+                    ...
+                })
+        axios(url[, config]);
+            axios(url);
+    响应结构：
+        then(function(response){...})回调函数的参数response
+            response.data   -  服务端响应的数据
+            
+    拦截器：（请求或响应在被then或catch处理前拦截）
+        //添加请求拦截器
+        axios.interceptors.request.use(function(config){
+            //发送请求之前
+            return config;
+        }, function(err){
+            //请求错误时处理
+            return Promise.reject(err);
+        });
+
+        //提娜佳响应拦截器
+        axios.interceptors.response.use(function(response){
+            //响应数据
+            return response;
+        }, function(err){
+            //响应出错处理
+            return Promise.reject(err);
+        });
+    移除拦截器：
+        axios.interceptors.request.eject(reqInterceptor);
+        axios.interceptors.response.eject(resInterceptor);
+
+Ajax(vue-resouce):
+    Vue要实现异步加载需要使用vue-resouce库
+    GET请求：
+        get: function(){
+            this.$http.get(url).then(function(res){...}, function(){})
+        }
+        传递参数：
+        this.$http.get(url, {params: jsonData}).then(function(res){...}, function(){})
+            jsonData是传入后端的参数
+    POST请求：
+        post: function(){
+            this.$http.post(url, {...}, {emulateJSON: true}).then(function(res){...}, function(){})
+        }
+        emulateJSON作用：如果web服务器无法处理编码为application/json 的请求。可以启用emulateJSON
+    语法&API:
+        可以使用全局Vue.http或者在Vue实例中使用this.$http来发起HTTP请求
+        基于全局Vue：
+            Vue.http.get(url, [options]).then(successCallback, errCallback);
+            Vue.http.post(url, [body], [options]).then(successCallback, errCallback);
+        基于Vue实例内部：
+            this.$http.get(url, [options]).then(successCallback, errCallback);
+            this.$http.poat(url, [body], [options]).then(successCallback, errCallback);
+
+
+响应接口：
+    Vue可以添加数据动态响应接口，例如利用$watch实现对数据的监听
+    Vue不允许在已经创建的实例上动态添加新的响应式属性
+    Vue不能检测到对象属性的添加和删除
+    运行过程中实现添加或者删除，可以使用全局Vue，Vue.set和Vue.delete
+    Vue.set
+        方法用于设置对象的属性，可解决Vue无法检测添加属性的限制
+        Vue.set(target, key, value)
+            target - 对象或数组
+            kay - 字符串或数字
+            value = 任意类型
+    Vue.delete
+        用于删除动态添加的属性
+        Vue.delete(target, key)
+            target - 对象或数组
+            kay - 字符串或数字
