@@ -1,0 +1,122 @@
+关系型数据库遵循ACID规则，即：1.原子性、2.一致性、3.独立性、持久性
+
+分布式系统：有多台计算机和通信软件组件通过计算机网络连接组成
+
+分布式计算优点：1、可靠性、2.可扩展性、3.资源共享、4.灵活性、5.开放系统、6.更高的性能
+
+NoSql:指非关系型数据库。可以很容易访问和抓取数据。
+
+RMDBS vs NoSql:
+    RMDBS
+    - 高度组织化结构化数据
+    - 结构查询语言
+    - 数据和关系存储在单独的表中
+    - 数据操纵语言，数据定义语言
+    - 严格的一致性
+    - 基础事务
+    NoSql
+    - 代表不仅仅是SQL
+    - 没有声明性查询语句
+    - 没有预定义的模式
+    - 键 - 值对存储，列存储，文档存储，图形数据库
+    - 最终一致性，而非ACID属性
+    - CAP定理
+    - 高性能，高可用性和可伸缩性
+
+CAP定理：
+    C: 一致性，所有节点在同一时间具有相同的数据
+    A：可用性，保证每个请求不管成功或失败都有响应
+    P：分隔容忍，系统中任意信息的丢失或失败不会影响系统的继续运行
+    核心，一个分布式系统不可能同时很好的满足CA、CP、AP原则三大类
+
+BASE:
+    是NOSQL数据库通常对可用性和一致性的若要求原则
+    基本可用、软状态/柔性事务、最终一致性
+
+NoSql数据库分类：
+    列存储 - Hbase
+    文档存储 - MongoDB
+    key-value存储 - Redis
+    图存储 - Neo4j
+    对象存储 - db4o
+    xml数据库 - BaseX
+
+MongoDB:
+    由C++编写，是一个基于分布式文件存储的开源数据库系统
+    旨在为Web应用提供高可扩展的高性能数据存储解决方案
+    MongoDB将数据存储为一个文档，数据结构由键值对组成，类似于JSON对象
+
+    Sql             MongoDB
+    database        database            数据库
+    table           collection          数据库表/集合
+    row             document            数据记录行/文档
+    column          field               数据字段/域
+    index           index               索引
+    table joins                         表连接，MongoDB不支持
+    primary key     primary key         主键，MongoDB自动将_id字段设置为主键
+
+    一个MongoDB可以建立多个数据库，单个实例可容纳多个独立的数据库
+
+    数据库名要求：
+        - 不能是空字符串
+        - 不得含有空格、.、$、/、\、和\0
+        - 应该全部小写
+        - 最多64字节
+    保留的数据库名:
+        admin  - root数据库
+        local  - 这个数据永远不会被复制，可用来存储限于本地单台服务器的任意集合
+        config - 当Mongo用于分片设置时，config数据库在内部使用，用于保存分片地相关信息
+    
+    文档：
+        文档是一个组键值对。文档不需要设置相同的字段，相同的字段不需要相同的数据类型
+        数据库服务 mongod 客户端 mongo
+        注意：
+            - 文档中的键值对是有序的
+            - 文档中的值不仅可在双引号的字符串，还可以是其他几种数据类型
+            - 区分类型和大小写
+            - 文档不能由重复的键
+            - 文档的键是字符串。键可使用任意UTF-8字符
+        键命名：
+            - 不能含有空格
+            - .和$有特别的意义，只有特定环境才能使用
+            - 下划线_开头的键是保留的
+        
+    集合：
+        集合就是MongoDB的文档组，类似于RMDBS中的表格table
+        集合没有固定结构，可插入不同格式和类型的数据
+        合法的集合名：
+            - 集合名不能是空字符串
+            - 不能含有空字符串
+            - 不能以system.开头
+            - 不能含有保留字符
+        capped collections:
+
+    元数据：
+        数据库的信息是存储在集合中，使用系统的命名空间
+            dbname.system.*
+        <dbname>.system.*是包含多种系统信息的特殊集合，如：
+            dbname.system.namespaces        列出所有名字空间
+            dbname.system.indexes           列出所有索引
+            dbname.system.profile           包含数据库的概要信息
+            dbname.system.users             列出所有可访问数据库的用户
+            dbname.local.sources            包含复制对端的服务器信息和状态
+    
+    数据类型：
+        String、Integer、Boolean、Double、Min\Max keys、Array、Timestamp、Object、
+        Null、Symbol、Data、Object ID、Binary Data、Code、Regular expression
+        ObjectId类似唯一主键，可以很快去生成和排序，包含12bytes
+            - 前4个字节表示时间戳，比北京时间晚8小时
+            - 接下来3个字节是机器标识码
+            - 接下来2个字节由进程id组成PID
+            - 最后3个字节是随机数
+
+    连接：
+        标准URI连接语法：
+        mongodb://[username:password@]host1[:port1][,host2[:port2]],..[,hostN[:portN]][/[database][?options]]
+            mongodb://              - 固定形式
+            username:password@      - 可选项
+            host1                   - 必须指定至少一个host，指定连接的服务器地址
+            port1                   - 指端口
+            /database               - 指定数据库
+            ?options                - 连接选项，键值对出现，多个用&或;隔开
+
