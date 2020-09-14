@@ -1,0 +1,180 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+width=device-width   宽度为设备的宽度
+initial-scale=1.0    初始缩放比例
+shrink-to-fit=no     自动适应屏幕的宽度
+
+Bootstrap4 需要一个容器来包裹网站的内容
+    .container  用于固定宽度并支持响应式布局的容器
+    .container-fluid 用于100%宽度，占据全部视口(viewport)的容器
+
+网格系统：系统会自动将屏幕尺寸分为12列
+    网格系统是响应式的，列会根据屏幕自动调整大小
+    网格类（5类）：
+        .col-       针对所有设备
+        .col-sm-    平板，屏幕宽度大于等于576px
+        .col-md-    桌面显示器，宽度大于等于768px
+        .col-lg-    大桌面显示器，屏幕宽度大于等于992px
+        .col-xl-    超大桌面显示器,屏幕宽度大于等于1200px
+    网格系统规则：
+        - 网格每一行需要在放置了.container或.container-fluid类容器中
+        - 使用行(.row)来创建水平列(.col-*)组
+        - 内容需放置在列中
+        - 3和4最大区别是4使用弹性盒子
+    创建一行：<div class='row'></div>
+    <div class='col-*-*'> 第一个*表示响应的设备sm,md,lg,xl；第二个*表示同一行的列宽，总共加起来12列
+    <dvi class='col'> 一行中每个列等宽均匀分布
+    
+文字排版：
+    默认font-size为16px,line-height为1.5
+    所有p元素margin-top为0，margin-bootom为16px
+
+    display标题类：控制标题的样式，输出更大更粗的字体样式
+        .display-1、.display-2、.display-3、.display-4
+    
+    <small>标签用于创建副标题、<mark>标签高亮文本
+    .text-left      左对齐文本
+    .text-center    居中文本
+    .text-right     右对齐文本
+    .text-justify   文本超出屏幕自动换行
+    .text-nowrap    文本超出屏幕不换行
+    .list-unstyled  移除默认列表样式
+    .list-inline    将列表放置在同一行
+
+颜色：
+    字体颜色：
+        .text-primary/.text-muted/.text-info/.text-success/.text-warning/.text-danger/.text-dark/.text-light/.text-white
+    背景颜色：
+        .bg=primary/.bg-info/.bg-success/.bg-warning/.bg-danger/.bg-dark/.bg-light/.bg-scondary
+
+表格：
+    基础表格 .table
+    条纹表格 .table-striped
+    带边框表格 .table-bordered
+    鼠标悬停状态 .table-hover
+    黑色背景表格 .table-dark
+    较小表格  .table-sm
+    响应式表格 .table-responsive[-sm|-md|-lg|xl]
+    
+    表格颜色：
+        .table-primary      蓝色
+        .table-success      绿色
+        .table-danger       红色
+        .table-info         浅蓝色
+        .table-warning      橘色
+        .table-active       灰色
+        .table-secondary    灰色
+        .table-light        浅灰色
+        .table-dark         深灰色
+
+图像：
+    形状：
+        .rounded  显示圆角效果
+        .rounded-circle 椭圆效果
+        .img-thumbnail  缩略图
+    对齐方式：
+        .float-right    右对齐
+        .float-left     左对齐
+    响应式图片：
+        .img-fluid
+    
+Jumbotron:
+    .jumbotron 
+    .jumbotron-fluid
+
+信息提示框：
+    .alert
+    .alert-success/.alert-info/.alert-primary/.alert-warning/.alert-danger/.alert-light/.alert-dark/.alert-secondary
+    提示框添加链接：
+        .alert-link
+    关闭提示框：
+        div添加.alert-dismissble
+        关闭按钮添加 class='close' data-dismiss='alert'
+    提示动画：
+        .fade 淡出
+        .show 淡入
+
+按钮：
+    .btn  可用于<a>、<button>、<input>
+    按钮背景颜色：
+        .btn-parimary/.btn-info/.btn-success/.btn-danger/.btn-warning/.btn-dark/.btn-light
+    按钮边框颜色：
+        .btn-outline-primary/.btn-outline-info/.btn-outline-danger/.btn-outline-warning/.btn-outline-dark
+    不同大小按钮：
+        .btn-sm 
+        .btn-primary
+        .btn-lg
+    块级按钮：
+        .btn-block
+    激活/禁用按钮：
+        .active/.disabled
+    按钮组：
+        .btn-group
+        .btn-group-sm|lg 按钮组大小
+        .btn-group-vertical 垂直按钮组
+
+徽章badges:主要用于突出显示新的或未读的项
+    .badge
+    .badge-primary/.badge=info/.badge-success/.badge-danger/.badge-warning/.badge-dark
+    .badge-pill 药丸形状
+
+进度条：显示用户任务完成过程
+    - 添加一个带有.progress类的<div>
+    - 在<div>内添加一个带有.progress-bar类的<div>
+    - 添加一个百分比宽度style属性，style="width:n%"
+    不同颜色使用背景色 bg-*
+    条纹进度条：.progress-bar-striped
+    动画进度条：.progress-bar-animated（有条纹基础上）
+
+分页：
+    创建一个基本分页：
+        - <ul>标签添加.pagination类
+        - <li>标签添加.page-item类
+        - <a>标签添加.page-link类
+    <ul class='pagination'><li class="page-item"><a href="##" class='page-link'></a><li></ul>
+    选中/禁用 .active/.disabled类添加到page-item类一起
+    分页条目大小 .pagination-sm|lg类添加到.pagination类一起
+
+列表组：
+    - <ul>标签添加.list-group类 
+    - <li>标签添加.list-group-item类
+    激活/禁用 .active/.disabled 
+    - <div>标签添加.list-group类 
+    - <a>标签添加.list-group-item类,鼠标悬停.list-group-item-action
+    列表颜色
+        .list-group-item-*
+    
+卡片：
+    .card 
+    .card-header
+    .card-body
+    .card-footer
+    不同颜色卡片：.bg-*
+    .card-body内的标题、文本、链接：
+        .card-title
+        .card-text
+        .card-link
+    图片卡片：
+        给<img>添加.card-img-top（图片在文字上方）或.card-img-bottom
+        图片设置为卡片背景:.card-img-overlay替换.card-body
+    
+下拉菜单：
+    下拉菜单依赖popper.min.js
+    .dropdown       用来指定一个下拉菜单
+    .dropdown-toggle data-toggle="dropdown" 按钮或链接打开下拉菜单
+    .dropdown-menu      实际下拉菜单
+    .dropdown-item      下拉菜单项
+    .dropdown-divider   下拉菜单项分割线
+    .dropdown-header    下拉菜单项标题
+    .active / .disabled 可用/禁用
+    下拉菜定位：
+        .dropdown-menu-right   右对齐
+    下拉菜单弹出方向：默认向下
+        .dropright  向右弹出
+        .dropleft   向左弹出
+        .dropup     向上弹出
+
+折叠：
+    .collapse类用于指定折叠元素，内容隐藏/显示切换
+    控制折叠元素的显示/隐藏切换元素添加属性 data-toggle='collapse' data-target='#id'（id为折叠元素的id）
+    a标签控制
+
