@@ -1,5 +1,6 @@
 VUE是一套构建用户界面的渐进式框架
 VUE只关注视图层，采用自底向上增加开发的设计
+数据流向是单向的，vue实例 --> DOM文档
 
 引入vue.js文件，构建大型应用建议使用NPM安装vue
 
@@ -26,7 +27,7 @@ vue内部提供了一些实例属性与方法，前缀$,便于与自定义区分
     html:
         v-html - 输出html代码
     属性：
-        v-bind - html属性值
+        v-bind - 用来绑定数据
     表达式：
         {{...}} 在双花括号内支持js表达式操作
     指令：
@@ -54,10 +55,14 @@ vue内部提供了一些实例属性与方法，前缀$,便于与自定义区分
             v-if是动态添加，为false时，完全移除该元素，dom树中不存在
             v-show仅隐藏/显示，为false时，依旧存在dom树中，若原有样式设置了display：none，会出错
     循环语句：v-for
-        v-for="site in sites"  site元素迭代别名 sites是源数据
+        v-for="site in sites"  site元素迭代别名 sites是源数据,可使用of替代in
+        v-for="(site, index) in sites"
         v-for="value in object"
         v-for-"(value, key) in object"
         v-for-"(value, key, index) in object"
+        数组更新检测：
+            变更方法：push()、pop()、shift()、unshift()、splice()、sort()、reverse()
+            替换数组：filter()、concat()、slice()不会变更原始数组，总是返回新的数组
 
 计算属性：
     计算属性关键词：computed
@@ -100,8 +105,9 @@ vue内部提供了一些实例属性与方法，前缀$,便于与自定义区分
         .stop = 阻止冒泡
         .prevent - 阻止默认事件
         .capture - 阻止捕获
-        .self - 只监听触发该元素的是事件
+        .self - 只监听触发该元素的子事件
         .once - 只触发一次
+        .passive -
         .left - 左键事件
         .left - 右键事件
         .middle - 中间滑轮事件
@@ -118,7 +124,7 @@ vue内部提供了一些实例属性与方法，前缀$,便于与自定义区分
         v-on:keyup.right=""
         v-on:keyup.ctrl=""
         v-on:keyup.alt=""
-        v-on:keyup.enter=""
+        v-on:keyup.meta=""
         v-on:keyup.shift=""
 
 表单：
@@ -134,18 +140,30 @@ vue内部提供了一些实例属性与方法，前缀$,便于与自定义区分
 
 组件：
     组件可扩展HTML元素，封装可重用的代码
+    每个组件是独立的，每用一次组件创建一个新的实例
     注册一个全局的组件语法：
         Vue.component(tagName, options)
-            tagName - 组件名   options - 配置选项
+            tagName - 组件名   options - 配置选项 options中data必须是一个函数
     通过 <tagName> </tagName> 调用
-
-    注册一个局部的组件 components: {  tagName: { options  }   }
+    tagName组件名：是Vue.component的第一个参数，有两种命名方式：短横线分隔命名(my-component-name)、首字母大写命名(MyComponentName)
+   
+    注册一个局部的组件语法：
+        components: {  
+            tagName1: { options  },
+            tagName2: { options  } 
+        }
 
     Prop是子组件接收父组件传递过来的数据的一个自定义属性
         父组件数据通过props把数据传递给子组件，子组件需要显式的用props选项声明prop
+        Vue.component('', {
+            props:[],
+            template:''
+        })
+
     动态Prop
         v-bind动态绑定props的值到父组件的数据中，每当父组件的值发生变化时，变化传到子组件
         prop是单向绑定：当父组件属性变化时，将传导给子组件，但不会反过来
+        
     Prop验证
         组件为props指定验证要求，为props中的值提供一个带有验证需求的对象
 
