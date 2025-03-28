@@ -1,0 +1,371 @@
+测试人员Linux常用命令
+
+
+根目录核心目录
+./mnt   # 测试目录                                               
+./root  # root用户的家目录
+./home  # 普通用户的家目录
+./tmp   # 临时目录(比如文件上传时)
+./var   # 存放软件日志的地方
+./boot  # 系统启动文件
+./etc   # 系统默认放置配置文件的地方
+./bin   # 所有用户都能执行的程序
+./sbin  # 只有root才能执行的程序
+./usr   # 用户自己的软件都可以放到这儿来
+./dev   # 存放硬件设备的地方(/dev/cdrom)
+./media # 挂载光盘使用的
+
+
+
+系统信息
+# 显示机器的处理器架构
+arch
+uname -m
+# 显示正在使用的内核版本
+uname -r
+# 显示硬件系统部件(SMBIOS/DMI)
+dmidecode -q
+# 罗列一个磁盘的架构特性
+hdparm -i /dev/hda
+# 在磁盘上执行测试性读取操作
+hdparm -tT /dev/sda
+# 显示CPU info的信息
+cat /proc/cpuinfo
+# 显示中断
+cat /proc/interrupts
+# 校验内存使用
+cat /proc/meminfo
+# 显示内核的版本
+cat /proc/version
+# 显示网络适配器及统计
+cat /proc/net/dev
+# 显示已加载的文件系统
+cat /proc/mounts
+# 显示系统日期
+date 
+# 显示2023年的日历表
+cal 2023
+# 设置日期和时间 - 月日时分年.秒
+date 021517002023.00
+# 将时间修改保存到 BIOS
+clock -w 
+关机 (系统的关机、重启以及注销 )
+# 关闭系统
+shutdown -h now
+init 0
+telinit 0
+# 按预定时间关闭系统
+shutdown -h hours:minutes
+# 取消按预定时间关闭系统
+shutdown -c
+# 重启
+shutdown -r now
+reboot
+# 注销
+logout
+
+
+
+文件和目录
+# 进入 '/ home' 目录'
+cd /home
+# 返回上一级目录
+cd ..
+# 返回上两级目录
+cd ../..
+# 进入个人的主目录
+cd
+# 返回上次所在的目录
+cd -
+# 显示当前工作路径
+pwd
+# 查看当前目录中的文件
+ls
+ls -F
+# 显示文件和目录的详细资料
+ls -l
+# 显示隐藏文件
+ls -a
+# 显示包含数字的文件名和目录名
+ls *[0-9]*
+# 显示文件和目录由根目录开始的树形结构
+tree
+lstree
+# 创建一个叫做 'dir1' 的目录'
+mkdir dir1
+# 同时创建两个目录
+mkdir dir1 dir2
+# 创建一个目录树
+mkdir -p /tmp/dir1/dir2
+# 创建一个txt类型的空文件
+touch file1.txt
+# 删除一个叫做 'file1.txt'的文件'
+rm -f file1.txt
+# 删除一个叫做 'dir1' 的目录'
+rmdir dir1
+# 删除一个叫做 'dir1' 的目录并同时删除其内容
+rm -rf dir1
+# 同时删除两个目录及它们的内容
+rm -rf dir1 dir2
+# 重命名/移动 一个目录
+mv dir1 new_dir
+# 复制一个文件
+cp file1 file2
+# 复制一个目录下的所有文件到当前工作目录
+cp dir/* .
+# 复制一个目录到当前工作目录
+cp -a /tmp/dir1 .
+# 复制一个目录
+cp -a dir1 dir2
+# 创建一个指向文件或目录的软链接
+ln -s file1 lnk1
+# 创建一个指向文件或目录的物理链接
+ln file1 lnk1
+# 显示file1的文件类型
+file file1 
+# 列出已知的编码
+iconv -l
+
+
+
+查找命令
+# 从'/'开始进入根文件系统搜索文件和目录
+find / -name file1
+# 搜索属于用户'user1'的文件和目录
+find / -user user1
+# 在目录'/home/user1'中搜索带有'.bin'结尾的文件
+find /home/user1 -name \*.bin
+# 搜索在过去100天内未被使用过的执行文件
+find /usr/bin -type f -atime +100
+# 搜索在10天内被创建或者修改过的文件
+find /usr/bin -type f -mtime -10
+# 搜索 etc 目录下所有以 sh 开头的文件，先运行 'updatedb' 命令 
+locate /etc/sh
+# 查找 /var 目录下，以 reason 结尾的文件，先运行 'updatedb' 命令 
+locate -r '^/var.*reason$'
+# 查找一个命令是否存在
+which cat
+# 查看一个命令在哪里
+whereis cat
+# 在test.txt文件中搜索abc字符串，大小写敏感且显示行；
+grep abc test.txt
+
+
+
+查看文件内容
+# 从第一个字节开始正向查看文件的内容
+cat file1 
+# 从最后一行开始反向查看一个文件的内容
+tac file1
+# 查看一个长文件的内容
+more file1
+# 类似于 'more' 命令，但是它允许在文件中和正向操作一样的反向操作
+less file1
+# 查看一个文件的前两行
+head -2 file1
+# 查看一个文件的最后两行
+tail -2 file1
+# 实时查看被添加到一个文件中的内容，查看日志最常用
+tail -f /var/log/messages
+tailf /var/log/messages
+tail -10f /var/log/messages
+
+
+
+系统资源
+# 查看cpu资源使用情况
+top  
+# 查看磁盘
+fdisk
+# 查看磁盘使用情况
+df
+# 查看内存使用情况
+free
+# df查看磁盘使用情况/查看文件占用情况大小  
+df/du 
+# 查看所有端口
+netstat -ntlp
+# 查看进程
+ps -ef
+# 查找指定nginx服务进程
+ps -ef | grep nginx
+# 杀死进程
+kill pid
+# 强制杀死进程
+kill -9 pid               
+用户和群组
+# 创建一个新用户组
+groupadd group_name
+# 删除一个用户组
+groupdel group_name
+#  重命名一个用户组
+groupmod -n new_group_name old_group_name
+# 删除一个用户 ( '-r' 排除主目录)
+userdel -r user1
+# 修改密码
+passwd 
+# 修改一个用户的密码 (只允许root执行)
+passwd user1 
+# 切换用户
+su - 用户名
+# 普通用户能使用root权限的权利。只需输入自己账户的密码即可。
+sudo
+
+
+
+文件权限
+权限管理主要包括两部分：
+
+1、文件的读写执行权限:
+r -- 读：对于一个目录，如果没有r权限，那么就意味着不能通过ls查看这个目录的内容
+w -- 写：对于一个目录，如果没有w权限，那么就意味着不能在目录下创建/删除
+x -- 执行：对于一个目录，如果没有x权限，那么就意味着不能通过cd进入这个目录
+Linux系统的具体权限是由数字来表示的。读取的权限等于 4，用 r 表示；写入的权限等于 2 ，用 w 表示；执行权限等于 1，用 x 表示。
+0（没有权限）、4（读取权限）、5（4+1 | 读取+执行）、6（4+2 | 读取+写入）、7（4+2+1 | 读取+写入+执行）
+
+以755为例：
+ 7 等于 4+2+1，rwx，所有者具有读取、写入、执行权限；
+ 5 等于 4+1+0，r-x，同组用户具有读取、执行权限，但没有写入权限；
+7-9 位 5，同上，也是 r-x，其他用户具有读取、执行权限，但没有写入权限。
+
+文件的读写权限: chmod
+# 文件让root用户由执行权限
+chmod +x /data/file
+# 该文件的其他用户没有执行权限
+chmod o-x /data/file
+# 将/home里的所有目录、子目录以及文件设置为755权限
+chmod -R 755 /home/*
+
+2、文件的归属权限:
+当前用户：这个文件是归谁所有，这是唯一的
+用户属组：这个文件属于哪个组，这个组中所有成员都有权限操作这个文件，这是不唯一的
+其他用户：就是其他用户，不属于user，也不属于group
+
+更改用户归属权限命令：chown
+# 将一个归属于root用户的目录abc更改为其他用户admin
+chown admin.admin /abc
+# 将一个归属于root用户的目录abc以及所有子目录更改为其他用户admin
+chown -R admin.admin /abc
+
+
+
+打包压缩文件
+# zip制作
+zip -r myshop15.zip myshop15
+# zip解压
+unzip myshop15.zip
+# 查看
+zipunzip -l myshop15.zip
+# gz制作
+tar czf myshop15.tar.gz myshop15
+# gz解压
+tar xzf myshop15.tar.gz
+# gz查看
+tar tf myshop15.tar.gz
+
+
+
+vi/vim编辑器
+一、命令模式
+a或i # 编辑模式 esc 退回命令模式
+:或/ # 末行模式 esc esc 退回命令模式
+v # 可视化模式 esc 退回命令模式
+wq # 保存并退出
+q! # 强制退出不保存
+gg #移动光标到首行
+G # 移动光标到末行
+行号+G # 快速移动光标到指定行
+dd  # 剪切或删除 
+D # 删除行使之变成空白行   
+/+关键词 # 查找内容
+
+二、编辑模式
+esc esc :wq # 保存并退出
+esc esc :q! # 强制退出不保存
+gg # 移动光标到首行
+G # 移动光标到末行
+
+三、末行模式
+:w # 保存但不推出
+:q # 退出
+:wq # 保存退出
+:q! # 强制退出不保存
+
+
+
+网络命令
+#网络配置查看
+ifconfig
+ip a
+#测试网络连通性
+ping
+#显示正确的路由表
+ip route
+#跟踪路由
+traceroute
+tracepath
+mtr
+#确定名称服务器使用
+nslookup
+host
+dig
+#抓包工具
+tcpdump
+wireshark
+
+
+
+OS包管理器
+RPM包 - （Fedora, Redhat及类似系统） 
+# 安装一个rpm包 
+rpm -ivh package.rpm 
+# 安装一个rpm包而忽略依赖关系警告 
+rpm -ivh --nodeps package.rpm
+# 更新一个rpm包但不改变其配置文件 
+rpm -U package.rpm
+# 更新一个确定已经安装的rpm包 
+rpm -F package.rpm
+# 删除一个rpm包[加--nodeps表示忽略依赖关系] 
+rpm -e [--nodeps] package_name.rpm
+# 显示系统中所有已经安装的rpm包
+rpm -qa
+# 显示所有名称中包含 "httpd" 字样的rpm包
+rpm -qa | grep httpd
+
+
+YUM软件包升级器 - （Fedora, RedHat及类似系统）
+# 下载并安装一个rpm包 
+yum install package_name  # 如: yum -y install zip unzip
+# 安装一个rpm包，使用你自己的软件仓库为你解决所有依赖关系 
+yum localinstall package_name.rpm 
+# 更新当前系统中所有安装的rpm包 
+yum update package_name.rpm 
+# 更新一个rpm包 
+yum update package_name
+# 删除一个rpm包 
+yum remove package_name 
+# 列出所有可安裝的软件清单命令
+yum list | grep tmux
+
+DEB包 (Debian, Ubuntu 以及类似系统) 
+#  安装/更新一个 deb 包 
+dpkg -i package.deb
+# 从系统删除一个 deb 包 
+dpkg -r package_name
+# 显示系统中所有已经安装的 deb 包
+dpkg -l  
+# 显示所有名称中包含 "httpd" 字样的deb包
+dpkg -l | grep httpd 
+
+
+APT软件工具 (Debian, Ubuntu 以及类似系统) 
+# 安装/更新一个 deb 包 
+apt-get install package_name 
+# 从光盘安装/更新一个 deb 包 
+apt-cdrom install package_name 
+# 升级列表中的软件包 
+apt-get update
+# 升级所有已安装的软件 
+apt-get upgrade
+ # 从系统删除一个deb包 
+apt-get remove package_name
